@@ -25,8 +25,8 @@
           <li class="treeview">
                 <a href="#"> <i class="fa fa-dashboard"></i><span>Produk</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <<li><a href="#">Pre-order</a></li>
-                    <li><a href="#">Ready Stock</a></li>
+                    <<li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Pre-order</a></li>
+                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/readystock') }}">Ready Stock</a></li>
                 </ul>
             </li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/metode') }}"><i class="fa fa-dashboard"></i> <span>Metode</span></a></li>

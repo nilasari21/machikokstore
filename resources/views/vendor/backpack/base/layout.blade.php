@@ -17,8 +17,14 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ asset("vendor/adminlte/bootstrap/css/font-awesome.min.css") }}" rel="stylesheet" type="text/css" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/datatables/dataTables.bootstrap.css" type="text/css" />
+
+    <!-- Image Upload -->
+    <link rel="stylesheet" href="{{ asset('imageUpload/') }}/dist/css/bootstrap-imageupload.min.css" type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
@@ -47,9 +53,9 @@
         <!-- Logo -->
         <a href="{{ url('') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini">{!! config('backpack.base.logo_mini') !!}</span>
+          <span class="logo-mini">MK</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">{!! config('backpack.base.logo_lg') !!}</span>
+          <span class="logo-lg">Machiko K-Store</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -102,14 +108,19 @@
 
     <!-- jQuery 2.2.0 -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.0.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.3.min.js"><\/script>')</script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('vendor/adminlte') }}/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/pace/pace.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/fastclick/fastclick.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/dist/js/app.min.js"></script>
+    <!-- Datatables -->
+    <script src="{{ asset("vendor/adminlte/plugins/datatables/jquery.dataTables.min.js") }}"></script>
+    <script src="{{ asset("vendor/adminlte/plugins/datatables/dataTables.bootstrap.min.js") }}"></script>
 
+    <!-- ImageUpload -->
+    <script src="{{ asset("imageUpload/dist/js/bootstrap-imageupload.min.js") }}"></script>
     <!-- page script -->
     <script type="text/javascript">
         // To make Pace works on Ajax calls
@@ -131,6 +142,55 @@
           }
         });
     </script>
+    <script type="text/javascript">
+           function displayForm(c){
+            
+            if (c.value=="option1"){
+                jQuery('#ukuran').hide();
+                jQuery('#buttonukuran').hide();  
+                jQuery('#buttonnonukuran').toggle('show'); 
+                
+
+            }
+            if (c.value=="option2"){
+                jQuery('#ukuran').toggle('show');
+                jQuery('#buttonukuran').toggle('show');
+                jQuery('#buttonnonukuran').hide();
+                 
+            }
+           };
+
+       </script>
+
+       <script type="text/javascript">
+        $(function(){
+          $('#buttonnonukuran').click(function(){
+            $(this).closest("form").attr('action','{{ url('admin/readystock/simpannonukuran') }}')
+          });
+        });
+       </script>
+
+       <script type="text/javascript">
+        $(function(){
+          $('#buttonukuran').click(function(){
+            $(this).closest("form").attr('action','{{ url('admin/readystock/simpanukuran') }}')
+          });
+        });
+       </script>
+
+       <script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
 
     @include('backpack::inc.alerts')
 

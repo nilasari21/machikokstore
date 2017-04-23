@@ -25,7 +25,7 @@ class KategoriRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'nama_kategori' => 'required'
         ];
     }
 
@@ -50,6 +50,7 @@ class KategoriRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     {
         return [
             //
+            'nama_kategori.required'=>"Nama Kategori harus diisi"
         ];
     }
 }

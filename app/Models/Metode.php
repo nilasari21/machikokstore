@@ -16,10 +16,10 @@ class Metode extends Model
     */
 
     protected $table = 'metode';
-    protected $primaryKey = 'id_metode_bayar';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id_metode_bayar','metode','nomor','rate','nama_rekening','jenis','status'];
+    protected $fillable = ['id','metode','nomor','rate','nama_rekening','jenis','status'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -34,7 +34,10 @@ class Metode extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function produk()
+    {
+        return $this->belongsToMany('App\Models\Produk');
+     }  
     /*
     |--------------------------------------------------------------------------
     | SCOPES
