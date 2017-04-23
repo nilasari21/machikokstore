@@ -1,0 +1,45 @@
+@section('css')
+<link href="{{asset("vendor/adminlte/plugins/iCheck/all.css")}}" rel="stylesheet" type="text/css" />
+<link href="{{asset("vendor/adminlte/plugins/fileinput/fileinput.min.css")}}" rel="stylesheet" type="text/css" />
+@endsection
+@section('js')
+<script src="{{asset("vendor/adminlte/plugins/iCheck/icheck.min.js")}}" type="text/javascript"></script>
+<script src="{{asset("vendor/adminlte/plugins/fileinput/fileinput.min.js")}}" type="text/javascript"></script>
+<script src="{{asset("vendor/adminlte/plugins/bootbox/bootbox.min.js")}}" type="text/javascript"></script>
+<script src="{{asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.js")}}" type="text/javascript"></script>
+<script src="{{asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.extensions.js")}}" type="text/javascript"></script>
+<script src="{{asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.numeric.extensions.js")}}" type="text/javascript"></script>
+<script>
+
+$("#input-2").fileinput({
+    uploadUrl: "",
+    uploadAsync: true,
+    minFileCount: 1,
+    maxFileCount: 5,
+    allowedFileExtensions: ["jpg", "gif", "png", "jpeg"],
+    uploadExtraData: function() {  // callback example
+        var out = {_token: "{{ csrf_token() }}"};
+        return out;
+    }
+});
+var max_fields = 10; //maximum input boxes allowed
+var wrapper = $(".input_fields_wrap"); //Fields wrapper
+var add_button = $(".add_field_button"); //Add button 
+var button = '<div class="form-group"><div class="row"><div class="col-xs-2"><input type="text" class="form-control" placeholder="Name" name="name[]"></div><div class="col-xs-2"><input type="text" class="form-control" placeholder="Value" name="value[]"></div><div class="col-xs-3"><button type="button" class="btn btn-default remove_field">Remove field</button></div></div></div>'
+
+var x = 1; //initlal text box count
+$(add_button).click(function(e) { //on add input button click
+    e.preventDefault();
+    if (x < max_fields) { //max input box allowed
+        x++; //text box increment
+        $(wrapper).append(button); //add input box
+    }
+});
+
+$(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
+    e.preventDefault();
+    $(this).closest('.form-group').remove();
+    x--;
+})
+</script>
+@endsection

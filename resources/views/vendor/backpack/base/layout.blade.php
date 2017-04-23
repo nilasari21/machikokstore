@@ -121,6 +121,10 @@
 
     <!-- ImageUpload -->
     <script src="{{ asset("imageUpload/dist/js/bootstrap-imageupload.min.js") }}"></script>
+
+    <!-- CK Editor -->
+    <script src="{{ asset("vendor/adminlte/plugins/ckeditor/ckeditor.js") }}"></script>
+    <!--<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>-->
     <!-- page script -->
     <script type="text/javascript">
         // To make Pace works on Ajax calls
@@ -191,7 +195,15 @@
     });
   });
 </script>
-
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor1');
+    //bootstrap WYSIHTML5 - text editor
+    $(".textarea").wysihtml5();
+  });
+</script>
     @include('backpack::inc.alerts')
 
     @yield('after_scripts')

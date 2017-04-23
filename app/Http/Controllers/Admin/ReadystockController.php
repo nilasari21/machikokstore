@@ -9,6 +9,7 @@ use App\Models\Kategori;
 use App\Models\Metode;
 use App\Models\Ukuran;
 use Image;
+use Illuminate\Support\Facades\Input;
 use App\Models\ProdukUkuran;
 
 
@@ -40,16 +41,41 @@ class ReadystockController extends Controller {
       
       
      // $metodeproduk = new MetodeProduk;
+      // $link = ('.img/produk/');
+      
+      $thumb = ('.img/produk/client');
+
       if($request->hasFile('image')){
-        $file = ('.img/produk/client');
-        $foto=$request->file('image');
-        $foto = time().'.'.$request->image->getClientOriginalExtension();
-        // Image :: make ($foto)->resize(100, 100)->getRealPath();
-        $request->image->move(public_path('.img/produk/client'), $foto);
-        // $foto=save(($file ),$foto);
-        $produk->foto=$foto;
-        
-      }
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $images = $request->file('image');
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        // $foto=$request->image->move(public_path('.img/produk/client'), $imageName);
+       // Image::make($request->hasFile('image')))->save();
+  Image::make($images)->resize('150', '150')->save($thumb . '/' . $imageName);
+
+        // $foto->resize(100, 100);
+        // $foto->save();
+        // return $imageName;
+        }
+
+         // if ($request->hasFile('image')) {
+         //        $images = $request->file('image');
+         //        foreach ($images as $image) {
+         //            $name = str_random(5) . '.' . $image->getClientOriginalExtension();
+         //            $img = new Gambar();
+         //            $img->img_name = $name;
+         //            $img->id_product = $pro_id;
+         //            $img->path_thumb = 'images/products/thumb/' . $name;
+         //            $img->path_full = 'images/products/full/' . $name;
+         //            $img->save();
+         //            Image::make($image)->save($full . '/' . $name);
+         //            Image::make($image)->resize('100', '100')->save($thumb . '/' . $name);
+         //        }
+                 
+         //    }
+            
       $produk->nama_produk= $request->nama_produk;
       $produk->harga= $request->harga;
       $produk->stock_total= $request->stock_total;
@@ -57,9 +83,9 @@ class ReadystockController extends Controller {
       $produk->minimal_beli= $request->minimal_beli;
       $produk->batas_jam= $request->batas_jam;
       $produk->status="Ready Stock";
-      
+      $produk->foto=$imageName;
       $produk->id_kategori=$request->id_kategori;
-      
+      $produk->keterangan=$request->editor1;
       $produk->save();
       $produk->metode()->attach($request->metode_id);
       return redirect()
@@ -80,13 +106,22 @@ class ReadystockController extends Controller {
 
         Project::create($data);
       }*/
-      if($request->hasFile('image')){
-        $foto = time().'.'.$request->image->getClientOriginalExtension()->resize(200, 200);
-        $request->image->move(public_path('.img/produk/client'), $foto);
-        $produk->foto=$foto;
+      $thumb = ('.img/produk/client');
 
-        
-      }
+      if($request->hasFile('image')){
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $images = $request->file('image');
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        // $foto=$request->image->move(public_path('.img/produk/client'), $imageName);
+       // Image::make($request->hasFile('image')))->save();
+        Image::make($images)->resize('150', '150')->save($thumb . '/' . $imageName);
+
+        // $foto->resize(100, 100);
+        // $foto->save();
+        // return $imageName;
+        }
       $produk->nama_produk= $request->nama_produk;
       $produk->harga= $request->harga;
       $produk->stock_total= $request->stock_total;
@@ -94,7 +129,8 @@ class ReadystockController extends Controller {
       $produk->minimal_beli= $request->minimal_beli;
       $produk->batas_jam= $request->batas_jam;
       $produk->status="Ready Stock";
-     
+      $produk->foto=$imageName;
+      $produk->keterangan=$request->editor1;
       $produk->id_kategori=$request->id_kategori;
       
       $produk->save();

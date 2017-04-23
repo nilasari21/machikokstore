@@ -3,11 +3,11 @@
 
 @section('content')
 
-<form method="POST"  >
+<form method="POST"  enctype="multipart/form-data" files="true">
    
     <div class="panel panel-card" style="padding:10px; ">
 {{ csrf_field() }}
-    <div class="form-group" enctype="multipart/form-data" >
+    <div class="form-group"  >
         <label for="exampleInputFile">Gambar Produk</label>
         <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
     </div>
@@ -70,7 +70,9 @@
     @endforeach
   <div class="form-group">
          <label>Deskripsi Produk</label>
-         <textarea name="product_description" class="form-control"></textarea>
+         <textarea id="editor1" name="editor1" rows="10" cols="80" >
+                                            
+                    </textarea>
          
    </div>
        {{ csrf_field() }}
