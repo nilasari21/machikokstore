@@ -9,7 +9,7 @@ use App\Models\Transaksi;
 
 use Illuminate\Http\Request;
 
-class TransaksiontrollerMachiko extends Controller {
+class TransaksiControllerMachiko extends Controller {
 
     public function index() {
       

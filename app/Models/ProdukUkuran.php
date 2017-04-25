@@ -43,6 +43,10 @@ class ProdukUkuran extends Model
     {
         return $this->belongsTo('App\Models\Ukuran');
      }*/
+      public function keranjang()
+    {
+        return $this->hasMany('App\Models\keranjang');
+     }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

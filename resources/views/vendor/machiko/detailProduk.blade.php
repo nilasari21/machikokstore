@@ -50,7 +50,9 @@
                         }
                     ?>
                     <br/><br/>
-                    <form method="POST"  action="#">
+                    <form method="POST"  action="{{ url('keranjang/tambah') }}">
+                        {{ csrf_field() }}
+                        <input type="hidden" size="4" name="produk_id" value="{{ $data->id }}">
                     <div class="col-md-6">
                          <div class="quantity buttons_added">
                             Jumlah
@@ -73,10 +75,10 @@
 
                             <div class="quantity buttons_added">
                                 
-                                <select class="form-control" name="id_ukuran" style="border: 1px solid #DF5E96;">
+                                <select class="form-control" name="id_produk_ukuran" style="border: 1px solid #DF5E96;">
                                     
                                     @foreach($ukuran as $uku)
-                                    <option value="{{$uku->id}}" >
+                                    <option value="{{$uku->id_detail}}" >
                                         {{$uku->nama_ukuran}}
                                     </option>
                                     @endforeach
@@ -95,10 +97,11 @@
                     </textarea>
 
                     
-                  </form>
+                  
                   <div class="col-md-6">
                         <button type="submit" class="add_to_wishlist">Beli</button>
-                </div>  
+                </div> 
+                </form> 
                 </div>
                 
                

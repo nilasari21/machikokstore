@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Produk extends Model
+class Keranjang extends Model
 {
     use CrudTrait;
 
@@ -16,13 +15,12 @@ class Produk extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'produk';
-    protected $primaryKey = 'id';
+    protected $table = 'keranjang';
+    protected $primaryKey = 'id_keranjang';
     // public $timestamps = false;
-    protected $guarded = ['id'];
-    protected $fillable = ['id','id_kategori','nama_produk','harga','stock_totak','berat','minimal_beli','status',
-    'tgl_awal_po','tgl_akhir_po','batas_waktu_bayar','batas_jam','foto','keterangan'];
-
+    // protected $guarded = ['id'];
+    protected $fillable = ['id_keranjang','produk_id','user_id','id_produk_ukuran',
+    'jumlah'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -31,29 +29,25 @@ class Produk extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function ukuran()
-    {
-         return $this->belongsToMany('App\Models\Ukuran')
-                    ->withPivot('produk_id','ukuran_id','stock','harga_tambah')
-                    ->withTimestamps();
-     }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function metode()
+    
+     public function produk()
     {
-        return $this->belongsToMany('App\Models\Metode');
-     }
-     public function keranjang()
+        return $this->belongsTo('App\Models\Produk','produk_id');
+     } 
+     public function user()
     {
-        return $this->hasMany('App\Models\keranjang');
-     }
-    /*public function produk_ukuran()
+        return $this->belongsTo('App\Models\User','user_id');
+     }  
+     public function produk_ukuran()
     {
-        return $this->hasMany('App\Models\ProdukUkuran','produk_id','ukuran_id','stock','harga_tambah','created_at','updated_at');
-     } */ 
+        return $this->belongsTo('App\Models\ProdukUkuran','id_produk_ukuran');
+     } 
     /*
     |--------------------------------------------------------------------------
     | SCOPES

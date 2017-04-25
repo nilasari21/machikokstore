@@ -31,4 +31,8 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+    public function keranjang()
+    {
+        return $this->hasMany('App\Models\keranjang');
+     }
 }

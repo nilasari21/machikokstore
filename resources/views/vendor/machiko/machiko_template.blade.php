@@ -74,5 +74,6 @@
     
     <!-- Main Script -->
     <script src="{{asset("vendor/machikoo/js/main.js")}}"></script>
+    
   </body>
 </html>
