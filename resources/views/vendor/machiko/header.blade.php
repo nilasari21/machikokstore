@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-8" style="float:right;">
                     <div class="logo" style="margin-top:10px">
-                        <h1>  <a href="#"><img src="vendor/machikoo/img/Macc.png" width="300px" height="300px" ></a></h1>
+                        <h1>  <a href="#"><img src="{{asset("/vendor/machikoo/img/Macc.png")}}" width="300px" height="300px" ></a></h1>
                     </div>
                 </div>
                 
@@ -71,7 +71,7 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="vendor/machikoo/img/user.jpg" width="20px" height="20px">
+                            <img src="{{asset("vendor/machikoo/img/user.jpg")}}" width="20px" height="20px">
                         </a>
                         <ul class="dropdown-menu" >
                             <!-- The user image in the menu -->

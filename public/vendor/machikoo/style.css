@@ -695,9 +695,25 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
     background: none repeat scroll 0 0 #DF5E96;
     border: medium none;
     color: #fff;
-    padding: 6px 25px;display: inline-block
+    font-family: raleway;
+    font-size: 15px;
+    padding: 6px 30px;display: inline-block
 }
 .add_to_cart_button:hover {background-color: #222;color: #fff;text-decoration: none}
+form.cart {
+    margin-bottom: 25px;
+}
+.add_to_wishlist {
+    background: none repeat scroll 0 0 #DF5E96;
+    /*border: medium none;*/
+    color: #fff;
+    font-family: raleway;
+    font-size: 15px;
+    /*width: 20px;*/
+    padding: 6px 30px;
+    display: inline-block
+}
+.add_to_wishlist:hover {background-color: #222;color: #fff;text-decoration: none}
 form.cart {
     margin-bottom: 25px;
 }

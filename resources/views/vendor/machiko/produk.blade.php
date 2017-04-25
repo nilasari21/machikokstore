@@ -16,9 +16,9 @@
                         <div class="product-carousel-price">
                             <ins>Rp{{ $row->harga }}</ins> 
                         </div>  
-                        
+                        <input type="hidden" class="form-control" name="harga" value="{{ $row->id }}" required>
                         <div class="product-option-shop">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Detail</a>
+                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('machikokstore/detailProduk/'.$row->id ) }}">Detail</a>
                         </div>                       
                     </div>
                 </div>

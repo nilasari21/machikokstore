@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/machiko', function () {
-    return view('vendor.machiko.test');
+    return view('vendor.machiko.coba');
 });
-Route::get('/machikokstore', 'ProdukControllerMachiko@index');
+Route::get('machikokstore', 'ProdukControllerMachiko@index');
+Route::get('/machikokstore/detailProduk/{id}', 'ProdukControllerMachiko@detail');
+

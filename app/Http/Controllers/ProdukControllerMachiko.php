@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
+use App\Models\ProdukUkuran;
 
 use Illuminate\Http\Request;
 
@@ -14,10 +15,21 @@ class ProdukControllerMachiko extends Controller {
       
         $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
                 ->select('produk.*','kategori_produk.*')
-                ->where('produk.status','=','Ready Stock')
+                // ->where('produk.status','=','Ready Stock')
                 ->get();
 
         return view('vendor.machiko.produk')->with('data',$data);
     }
+    public function detail($id) {
+      
+        $data = Produk::where('id',$id)->first();
+                		
+        $ukuran= ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
+                            ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                            ->get();
+        return view('vendor.machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran));
+    }
 
 }
+/*join('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
+                        ->select('produk.*','produk_ukuran.*')*/

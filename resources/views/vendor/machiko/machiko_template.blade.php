@@ -13,16 +13,16 @@
     
     <!-- Bootstrap -->
     <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
     <!-- Font Awesome -->
     <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
-     <link rel="stylesheet" href="vendor/machikoo/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+     <link rel="stylesheet" href="{{asset("/vendor/machikoo/css/font-awesome.min.css")}}" rel="stylesheet" type="text/css" >
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="vendor/machikoo/css/owl.carousel.css">
-    <link rel="stylesheet" href="vendor/machikoo/style.css">
+    <link rel="stylesheet" href="{{asset("vendor/machikoo/css/owl.carousel.css")}}">
+    <link rel="stylesheet" href="{{asset("vendor/machikoo/style.css")}}">
     
-    <link rel="stylesheet" href="vendor/machikoo/css/responsive.css">
-    <link rel="stylesheet" href="vendor/machikoo/css/dropdown.css">
+    <link rel="stylesheet" href="{{asset("vendor/machikoo/css/responsive.css")}}">
+    <link rel="stylesheet" href="{{asset("vendor/machikoo/css/dropdown.css")}}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,19 +60,19 @@
     
    
     <!-- Latest jQuery form server -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="{{asset("https://code.jquery.com/jquery.min.js")}}"></script>
     
     <!-- Bootstrap JS form CDN -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="{{asset("http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")}}"></script>
     
     <!-- jQuery sticky menu -->
-    <script src="vendor/machikoo/js/owl.carousel.min.js"></script>
-    <script src="vendor/machikoo/js/jquery.sticky.js"></script>
+    <script src="{{asset("vendor/machikoo/js/owl.carousel.min.js")}}"></script>
+    <script src="{{asset("vendor/machikoo/js/jquery.sticky.js")}}"></script>
     
     <!-- jQuery easing -->
-    <script src="vendor/machikoo/js/jquery.easing.1.3.min.js"></script>
+    <script src="{{asset("vendor/machikoo/js/jquery.easing.1.3.min.js")}}"></script>
     
     <!-- Main Script -->
-    <script src="vendor/machikoo/js/main.js"></script>
+    <script src="{{asset("vendor/machikoo/js/main.js")}}"></script>
   </body>
 </html>
