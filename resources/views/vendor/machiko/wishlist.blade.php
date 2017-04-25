@@ -5,6 +5,13 @@
 <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
+<?php 
+    if(count($data)==0){
+?>
+    Belum ada Wishlist
+<?php
+}else{ ?>
+   
             <div class="row">
                 @foreach ($data as $row)
                 <div class="col-md-3 col-sm-6">
@@ -25,5 +32,7 @@
                 @endforeach
                
             </div>
-            
-            @endsection
+<?php
+}
+?>
+@endsection

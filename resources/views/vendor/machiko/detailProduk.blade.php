@@ -28,7 +28,11 @@
                         Rp{{ $data->harga }},-
                     </div>
                     <div class="col-md-6">
-                        <a type="submit" class="add_to_wishlist" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#">Tambah_Wishlist</a>
+                         <form method="POST"  action="{{ url('wishlist/tambah') }}">
+                        {{ csrf_field() }}
+                            <input type="hidden" size="4" name="produk_id" value="{{ $data->id }}">
+                            <button type="submit" class="add_to_wishlist" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow">Tambah_Wishlist</a>
+                        </form>
                     </div>
                     <br/>
                     <br/>

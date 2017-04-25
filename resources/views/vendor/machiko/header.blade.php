@@ -52,7 +52,7 @@
                         <li>
                             <!-- <div class="col-sm-4" style="margin-top:20px;">  -->
                                 <!-- <div class="logo" > -->
-                                    <a href="#" ><i class="fa fa-heart" color="#0000" ></i></a>
+                                    <a href="{{ url('wishlist') }}" ><i class="fa fa-heart" color="#0000" ></i></a>
                                 <!-- </div> -->
                             <!-- </div> -->
                         </li>
