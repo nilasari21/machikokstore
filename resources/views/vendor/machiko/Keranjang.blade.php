@@ -1,16 +1,18 @@
 @extends('vendor.machiko.machiko_template')
 
 <script type="text/javascript">
-        
+        function startCalc(){
+            interval = setInterval("calc()",1);}
+        function calc(){
  
-            var satu = document.getElementById('nilai1').value; 
-            var dua = document.getElementById('nilai2').value;
-            var tiga = document.getElementById('nilai3').value;
-            var total = ((parseInt(satu)*parseInt(dua))+parseInt(tiga));
-            
-       document.getElementById("demo").innerHTML = var total;
-        
-       
+             satu = document.autoSumForm.nilai1.value; 
+             dua = document.autoSumForm.nilai2.value;
+             tiga = document.autoSumForm.nilai3.value;
+             total = ((parseInt(satu)*parseInt(dua))+parseInt(tiga));
+            document.autoSumForm.total.value=(satu*dua)+tiga;
+        }
+       function stopCalc(){
+            clearInterval(interval);
         
     </script>
 @section('content')
@@ -21,7 +23,7 @@
              <div class="col-md-8">
                                 <div class="product-content-right">
                                     <div class="woocommerce">
-                                        <form method="post" action="#">
+                                        <form method="post" action="#" name="autoSumForm">
                                             
                                             <table cellspacing="0" class="shop_table cart">
                                                 <thead>
@@ -68,29 +70,29 @@
                                                         <td class="product-quantity">
                                                             <div class="quantity buttons_added">
                                                                 
-                                                                <input type="jumlah" id="nilai1" size="4" class="input-text qty text" title="Qty" value="{{ $row->jumlah }}" min="0" step="1">
+                                                                <input type="jumlah" onFocus="startCalc();" onBlur="stopCalc();" id="nilai1" size="4" class="input-text qty text" title="Qty" value="{{ $row->jumlah }}" min="0" step="1">
                                                                 
                                                             </div>
                                                         </td>
                                                          <td class="product-price">
-                                                            <span class="amount" id="nilai2">{{ $row->harga }}</span> 
+                                                            <span class="amount" id="nilai2" ><input type="hidden" value="{{ $row->harga }}" onFocus="startCalc();" onBlur="stopCalc();">{{ $row->harga }}</span> 
                                                         </td>
                                                         <?php 
                                                            if(count($row->nama_ukuran)==0){
                                                             ?>
                                                             <td class="product-price">
-                                                                <span class="amount" id="nilai3">0</span> 
+                                                                <span class="amount" id="nilai3" ><input type="hidden" value="0" onFocus="startCalc();" onBlur="stopCalc();">0</span> 
                                                             </td>
                                                        <?php
                                                        }else{ ?>
                                                         <td class="product-price">
-                                                            <span class="amount" id="nilai3">{{ $row->harga_tambah }}</span> 
+                                                            <span class="amount" id="nilai3" ><input type="hidden" onFocus="startCalc();" onBlur="stopCalc();" value="{{ $row->harga_tambah }}" >{{ $row->harga_tambah }}</span> 
                                                         </td>
                                                         <?php
                                                        }
                                                        ?>
                                                        <td class="product-subtotal" >
-                                                            <span class="amount" ></span> 
+                                                            <span class="amount" ><input name="total" type="text" id="demo" onchange='tryNumberFormat(this.form.thirdBox);' readonly></span> 
                                                         </td>
                                                     </tr>
                                                     @endforeach
