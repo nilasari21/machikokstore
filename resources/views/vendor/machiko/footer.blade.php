@@ -1,8 +1,11 @@
 <footer class="main-footer">
+
 <div class="footer-bottom-area">
+
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
+                     
                     <div class="copyright">
                         <p>&copy; 2017 Machiko K-Store. All Rights Reserved. </p>
                     </div>

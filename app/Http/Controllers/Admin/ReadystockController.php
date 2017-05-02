@@ -9,7 +9,7 @@ use App\Models\Kategori;
 use App\Models\Metode;
 use App\Models\Ukuran;
 use Image;
-use Illuminate\Support\Facades\Input;
+cause Illuminate\Support\Fades\Input;
 use App\Models\ProdukUkuran;
 
 
@@ -53,7 +53,7 @@ class ReadystockController extends Controller {
         $imageName = time().'.'.$request->image->getClientOriginalExtension();
         // $foto=$request->image->move(public_path('.img/produk/client'), $imageName);
        // Image::make($request->hasFile('image')))->save();
-  Image::make($images)->resize('150', '150')->save($thumb . '/' . $imageName);
+  Image::make($images)->resize('200', '200')->save($thumb . '/' . $imageName);
 
         // $foto->resize(100, 100);
         // $foto->save();
@@ -116,7 +116,7 @@ class ReadystockController extends Controller {
         $imageName = time().'.'.$request->image->getClientOriginalExtension();
         // $foto=$request->image->move(public_path('.img/produk/client'), $imageName);
        // Image::make($request->hasFile('image')))->save();
-        Image::make($images)->resize('150', '150')->save($thumb . '/' . $imageName);
+        Image::make($images)->resize('200', '200')->save($thumb . '/' . $imageName);
 
         // $foto->resize(100, 100);
         // $foto->save();

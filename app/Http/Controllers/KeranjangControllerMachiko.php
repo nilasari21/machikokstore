@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Keranjang;
+use App\Models\Produk;
 use App\Models\ProdukUkuran;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,16 @@ class KeranjangControllerMachiko extends Controller {
         $data->id_produk_ukuran = $request->id_produk_ukuran;
         $data->jumlah = $request->jumlah;
         $data->keterangan = $request->keterangan;
+        $hargatambah=0;
+        $produkukuran= ProdukUkuran::where('produk_id','=',$request->produk_id)
+                    ->first();
+        if(count($produkukuran)!=0){
+            $hargatambah=$produkukuran->harga_tambah;
+        }else{
+            $hargatambah=0;
+        }
+        $produk= Produk::find($request->produk_id);
+        $data->Total_harga=$produk->harga * $request->jumlah+$hargatambah;
         $data->save();
 
         
@@ -47,6 +58,13 @@ class KeranjangControllerMachiko extends Controller {
                 ->with('succes', 'Berhasil simpan di keranjang');
 
        //
+    }
+
+    public function getDelete($id)
+    {
+        $data = Keranjang::where('id_keranjang','=',$id);
+        $data->delete();
+        return redirect('keranjang');
     }
 
 }

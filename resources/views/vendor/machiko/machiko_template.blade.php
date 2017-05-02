@@ -24,6 +24,13 @@
     <link rel="stylesheet" href="{{asset("vendor/machikoo/css/responsive.css")}}">
     <link rel="stylesheet" href="{{asset("vendor/machikoo/css/dropdown.css")}}">
 
+    <link rel="stylesheet" href="{{asset("imageUpload/dist/css/bootstrap-imageupload.min.css")}}">
+    <link rel="stylesheet" href="{{asset("vendor/machikoo/etalage.css")}}">    
+
+    <!-- dropzone -->
+    <link rel="stylesheet" href="{{asset("dropzone/dropzone.css")}}">
+    <link href="{{asset("vendor/adminlite/plugins/fileinput/fileinput.min.css")}}" rel="stylesheet" type="text/css" />
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,7 +57,11 @@
         <!-- Main content -->
         <section class="content">
             <!-- Your Page Content Here -->
+            
+            <!--  -->
+
             @yield('content')
+
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
     
@@ -74,6 +85,33 @@
     
     <!-- Main Script -->
     <script src="{{asset("vendor/machikoo/js/main.js")}}"></script>
-    
+
+    <script src="{{asset("imageUpload/dist/js/bootstrap-imageupload.min.js")}}"></script>
+
+    <!-- upload gambar -->
+    <script src="{{asset("dropzone/dropzone.js")}}"></script>
+    <script src="{{asset("vendor/adminlte/plugins/fileinput/fileinput.min.js")}}" type="text/javascript"></script>
+
+     </script>
+@yield('js')
+        <!-- hover effek -->
+            <script type="text/javascript">
+        $( document ).ready(function() {
+    $("[rel='tooltip']").tooltip();    
+ 
+    $('.thumbnail').hover(
+        function(){
+            $(this).find('.caption').slideDown(250); //.fadeIn(250)
+        },
+        function(){
+            $(this).find('.caption').slideUp(250); //.fadeOut(205)
+        }
+    ); 
+});
+    </script>
+    <script type="text/javascript">
+    var $imageupload = $('.imageupload');
+    $imageupload.imageupload();
+    </script>
   </body>
 </html>

@@ -20,8 +20,8 @@
     </div> <!-- End site branding area -->
 
     <div class="mainmenu-area">
-        <div class="container">
-            <div class="row">
+        <!-- <div class="container">
+            <div class="row"> -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -30,11 +30,11 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div> 
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse" style="padding-left:40px">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">Produk</a></li>
+                        <li><a href="{{ url('machikokstore') }}">Produk</a></li>
                         <li ><a href="#">Ongkos Kirim</a></li>
-                        <li><a href="{{ url('testimonimachiko') }}">Testimoni</a></li>
+                        <li><a href="{{ url('testimoni') }}">Testimoni</a></li>
                         <li><a href="#">Tentang Kami</a></li>
                         <li><a href="#">Bantuan</a></li>
                         <li>
@@ -67,25 +67,27 @@
                        <!--  <li>
                             <a href="#"><img src="machikoo/img/user.jpg" width="20px" height="20px"></a>
                         </li> -->
-                    <li class="dropdown user user-menu" >
-                        <!-- Menu Toggle Button -->
+                    <!-- <li class="dropdown user user-menu" >
+                        
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
+                        
                             <img src="{{asset("vendor/machikoo/img/user.jpg")}}" width="20px" height="20px">
                         </a>
-                        <ul class="dropdown-menu" >
-                            <!-- The user image in the menu -->
-                            <li><a href="#">Profil</a></li>
+                        <ul class="dropdown-menu" style="background:#F09BA0">
+                        
+                            <li ><a href="#">Profil</a></li>
                             <li ><a href="#">Konfirmasi Pembayaran</a></li>
                             <li><a href="#">Status Pemesanan</a></li>
                             <li><a href="#">Keluar</a></li>
                             
                         </ul>
-                    </li>
+                    </li> -->
+                    <li><a href="{{ url('daftar') }}">Daftar</a></li>
+                    <li><a href="{{ url('masuk') }}">Masuk</a></li>
                     </ul>
                 </div>  
-            </div>
-        </div>
+            <!-- </div>
+        </div> -->
     </div> <!-- End mainmenu area -->
 
     <div class="product-big-title-area">
