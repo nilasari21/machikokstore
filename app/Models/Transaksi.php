@@ -20,7 +20,7 @@ class Transaksi extends Model
     // public $timestamps = false;
     // protected $guarded = ['id'];
     protected $fillable = ['id_transaksi','id_user','tgl_transaksi','id_metode',
-    'id_konfirmasi','id_penerima','status_bayar','status_beli','total_berat','ongkir','total_bayar',
+    'id_konfirmasi','id_penerima','status_bayar','jenis_pemesanan','status_jenis_pesan','total_berat','ongkir','total_bayar',
     'resi'];
     // protected $hidden = [];
     // protected $dates = [];

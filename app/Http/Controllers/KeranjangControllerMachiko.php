@@ -19,7 +19,7 @@ class KeranjangControllerMachiko extends Controller {
                          ->leftJoin('produk_ukuran','produk_ukuran.id_detail','=','keranjang.id_produk_ukuran')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                          ->select('keranjang.*','produk.*','produk_ukuran.*','ukuran.*')
-                         ->where('user_id','=','1')
+                         ->where('user_id','=','2')
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
         // $data->ukuran= new ProdukUkuran;
@@ -36,10 +36,13 @@ class KeranjangControllerMachiko extends Controller {
         $data = new Keranjang; // new Model
         
         $data->produk_id = $request->produk_id;
-        $data->user_id = 1;
+        $data->user_id = 2;
         $data->id_produk_ukuran = $request->id_produk_ukuran;
         $data->jumlah = $request->jumlah;
         $data->keterangan = $request->keterangan;
+        $berat= Produk::where('id','=',$request->produk_id)
+                    ->first();
+        $data->berat_total=$berat->berat*$request->jumlah;
         $hargatambah=0;
         $produkukuran= ProdukUkuran::where('produk_id','=',$request->produk_id)
                     ->first();
@@ -64,6 +67,16 @@ class KeranjangControllerMachiko extends Controller {
     {
         $data = Keranjang::where('id_keranjang','=',$id);
         $data->delete();
+        return redirect('keranjang');
+    }
+
+    public function postUpdate($id, Request $request)
+    {
+        // proses update data
+        $data = Keranjang::where('id_keranjang','=',$id);
+        $data->jumlah = $request->jumlah;
+        $data->save();
+        // kembali ke halaman daftar mahasiswa
         return redirect('keranjang');
     }
 

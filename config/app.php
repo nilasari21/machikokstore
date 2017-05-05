@@ -165,6 +165,7 @@ return [
         Backpack\Base\BaseServiceProvider::class,
         Backpack\CRUD\CrudServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        rizalafani\rajaongkirlaravel\RajaOngkirServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,7 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'RajaOngkir' => rizalafani\rajaongkirlaravel\RajaOngkirFacade::class,
     ],
 
 ];

@@ -54,7 +54,7 @@
     </div>
     <label>Stock Total</label>
         <input type="text" class="form-control" name="stock_total" placeholder="Berat" required>
-    <label>Berat</label>
+    <label>Berat(gram)</label>
         <input type="text" class="form-control" name="berat" placeholder="Berat" required>
     <label>Minimal beli (Reseller)</label>
         <input type="text" class="form-control" name="minimal_beli" placeholder="minimal beli" required>

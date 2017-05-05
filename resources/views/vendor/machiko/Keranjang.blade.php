@@ -6,21 +6,22 @@
 <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
-             <div class="col-md-8">
+             <div class="col-md-12">
                                 <div class="product-content-right">
                                     <div class="woocommerce">
                                         <form method="post" action="#" name="autoSumForm">
-                                            
-                                            <table cellspacing="0" class="shop_table cart" >
+                                            <div class="table-responsive">
+                                            <table cellspacing="0" class="shop_table cart" style="width:100%;align:center" >
                                                 <thead >
                                                     <tr >
                                                         <th class="product-remove" style="background:#66CC99">&nbsp;</th>
                                                         <th class="product-thumbnail" style="background:#66CC99">Foto</th>
                                                         <th class="product-name" style="background:#66CC99">Produk</th>
                                                         <th class="product-price" style="background:#66CC99">Ukuran</th>
-                                                        <th class="product-quantity" style="background:#66CC99">Jumlah</th>
-                                                        <th class="product-price" style="background:#66CC99">Harga</th>
+                                                        <th class="product-quantity" style="background:#66CC99">Harga</th>
                                                         <th class="product-price" style="background:#66CC99">Harga Tambah</th>
+                                                        <th class="product-price" style="background:#66CC99">Jumlah</th>
+                                                        <th class="product-price" style="background:#66CC99">Berat</th>
                                                         <th class="product-subtotal" style="background:#66CC99">Total</th>
                                                     </tr>
                                                 </thead>
@@ -55,14 +56,9 @@
                                                         <?php
                                                        }
                                                        ?>
+                                                        <form method="post" action="{{ url('keranjang/edit/'.$row->id_keranjang) }}">
+                                                       
                                                         
-                                                        <td class="product-quantity">
-                                                            <div class="quantity buttons_added">
-                                                                
-                                                                <input type="number" id="nilai1{{$i}}" name="jumlah" class="item_quantity" min="1"   value="{{ $row->jumlah }}">
-                                                                
-                                                            </div>
-                                                        </td>
                                                          <td class="product-price">
                                                             <span class="amount"  ><input type="hidden" id="nilai2{{$i}}" value="{{ $row->harga }}" onFocus="startCalc();" onBlur="stopCalc();">{{ $row->harga }}</span> 
                                                         </td>
@@ -80,8 +76,18 @@
                                                         <?php
                                                        }
                                                        ?>
+                                                       <td class="product-quantity">
+                                                            <div class="quantity buttons_added">
+                                                                
+                                                                <input type="number" id="nilai1{{$i}}" name="jumlah" class="item_quantity" min="1"   value="{{ $row->jumlah }}">
+                                                                
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-name">
+                                                            <span class="amount" ><input name="berat" type="text" id="berat{{$i}}"  value="{{ $row->berat_total }} gram" style="width:70px" readonly></span> 
+                                                        </td>
                                                        <td class="product-subtotal" >
-                                                            <span class="amount" ><input name="total" type="text" id="total{{$i}}"  value="" readonly></span> 
+                                                            <span class="amount" ><input name="total" type="text" id="total{{$i}}"  value="" style="width:100px" readonly></span> 
                                                         </td>
                                                     </tr>
                                                     @php
@@ -89,20 +95,29 @@
                                                     @endphp
                                                     @endforeach
                                                     <tr>
-                                                        <td colspan="8">
-                                                            <strong>Total</strong>
-                                                            <input name="total" type="text" id="jumlah"  value="" readonly>
+                                                        <td colspan="9">
+                                                            <strong>Total(belum termasuk ongkos kirim)</strong>
+                                                            <input name="total" type="text" id="jumlah"  value="" style="width:100px"readonly>
+
+                                                    </tr>
+                                                     <tr>
+                                                        <td colspan="9">
+                                                            <strong>Berat total</strong>
+                                                            <input name="total" type="text" id="total_berat"  value="" style="width:50px" readonly>gram
+                                                            
                                                     <tr>
-                                                        <td class="actions" colspan="8">
+                                                        <td class="actions" colspan="9">
                                                             <!-- <input type="submit" value="Update Cart" name="update_cart" class="button" style="background:#66CC99"> -->
                                                             <button type="submit" class="add_to_wishlist">Update keranjanjang</button>
-                                                           <button type="submit" class="add_to_wishlist">Checkout</button>
+                                                         </form>
+                                                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/2') }}">Checkout</a>
                                                         </td>
 
                                                     </tr>
                                                     
                                                 </tbody>
                                             </table>
+                                        </div>
                                         </form>
 
                                       
@@ -114,12 +129,13 @@
 
             @section('js')
             <script type="text/javascript">
-        $(document).ready(function (){
+            $(document).ready(function (){
             @php
             $i=1;
             
             @endphp
             var  total=0;
+            var  berat_total=0;
             @foreach ($data as $row)
 
             var satu = document.getElementById("nilai1{{$i}}").value; 
@@ -128,12 +144,17 @@
             console.log(dua);
              var tiga = document.getElementById("nilai3{{$i}}").value; 
              console.log(tiga);
+             var berat = document.getElementById("berat{{$i}}").value; 
+             console.log(berat);
              var hasil = document.getElementById("total{{$i}}").value=( parseInt(satu)* parseInt(dua))+ parseInt(tiga);
 
              console.log(hasil);
              total=total+( parseInt(satu)* parseInt(dua))+ parseInt(tiga);
              document.getElementById("jumlah").value=total;
              console.log(total);
+             berat_total=berat_total+( parseInt(berat));
+             document.getElementById("total_berat").value=berat_total;
+             console.log(berat_total);
              @php
              $i++;
              

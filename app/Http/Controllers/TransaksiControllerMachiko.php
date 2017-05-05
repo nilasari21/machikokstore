@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Transaksi;
+use App\Models\Penerima;
+use App\Models\Keranjang;
+use App\Models\Metode;
+use DB;
+// use App\Models\Penerima;
 
 
 use Illuminate\Http\Request;
@@ -23,6 +28,45 @@ class TransaksiControllerMachiko extends Controller {
 
         return view('vendor.machiko.produk')->with('data',$data);
     }
+
+      public function checkout($id) {
+        $keranjang = Keranjang::join('produk','produk.id','=','keranjang.produk_id')
+                         // ->join('users','users.id','=','keranjang.user_id')
+                         ->leftJoin('produk_ukuran','produk_ukuran.id_detail','=','keranjang.id_produk_ukuran')
+                         ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                         ->select('keranjang.*','produk.*','produk_ukuran.*','ukuran.*',(DB::raw ('SUM(keranjang.berat_total) as berat')))
+                         ->where('user_id','=','2')
+                    // ->where('produk.status','=','Ready Stock')
+                         ->get();
+        $data = Transaksi::join('users','users.id','=','transaksi.id_user')
+                        ->join('penerima','transaksi.id_penerima','=','penerima.id_penerima')
+                        ->where('transaksi.id_user','=',$id)
+                        ->first();
+        $penerima = Penerima::where('penerima.id_user','=',$id)
+                        ->get();
+       
+                        // return $jumlahkeranjang;
+        $metodebanyak=  Metode::select('*',(DB::raw ('count(metode.metode) as c')))
+                              ->join ('metode_produk','metode_produk.metode_id','=','metode.id' )
+                              ->JOIN ('keranjang' ,'metode_produk.produk_id','=','keranjang.produk_id')
+                              ->where('keranjang.user_id','=',$id)
+                              ->GROUPBY ('metode.metode')
+                              ->HAVING ('c' ,'=',Keranjang::count('produk_id'))
+                              ->get();
+// return $metodebanyak;
+
+                            
+        return view('vendor.machiko.checkout')->with(compact('keranjang',$keranjang,'data',$data,'penerima',$penerima,'metodebanyak',$metodebanyak));
+    }
+
+    /*select metode.metode,count(metode) as jumlah 
+from keranjang 
+INNER join 
+metode_produk ON keranjang.produk_id = metode_produk.produk_id 
+INNER JOIN metode ON metode.id = metode_produk.metode_id
+where keranjang.user_id=2
+GROUP BY metode.metode  
+ORDER BY `jumlah`  DESC*/
     /*public function tambah(Request $request)
     {
         
