@@ -14,6 +14,7 @@
     <!-- Bootstrap -->
     <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->
     <!-- Font Awesome -->
     <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
      <link rel="stylesheet" href="{{asset("/vendor/machikoo/css/font-awesome.min.css")}}" rel="stylesheet" type="text/css" >
@@ -24,7 +25,7 @@
     <link rel="stylesheet" href="{{asset("vendor/machikoo/css/responsive.css")}}">
     <link rel="stylesheet" href="{{asset("vendor/machikoo/css/dropdown.css")}}">
 
-    <link rel="stylesheet" href="{{asset("imageUpload/dist/css/bootstrap-imageupload.min.css")}}">
+    <!-- <link rel="stylesheet" href="{{asset("imageUpload/dist/css/bootstrap-imageupload.min.css")}}"> -->
     <link rel="stylesheet" href="{{asset("vendor/machikoo/etalage.css")}}">    
 
     <!-- dropzone -->
@@ -87,7 +88,7 @@
     <!-- Main Script -->
     <script src="{{asset("vendor/machikoo/js/main.js")}}"></script>
 
-    <script src="{{asset("imageUpload/dist/js/bootstrap-imageupload.min.js")}}"></script>
+    <!--<script src="{{asset("imageUpload/dist/js/bootstrap-imageupload.min.js")}}"></script>-->
 
     <!-- upload gambar -->
     <script src="{{asset("dropzone/dropzone.js")}}"></script>
@@ -110,9 +111,6 @@
     ); 
 });
     </script>
-    <script type="text/javascript">
-    var $imageupload = $('.imageupload');
-    $imageupload.imageupload();
-    </script>
+    
   </body>
 </html>

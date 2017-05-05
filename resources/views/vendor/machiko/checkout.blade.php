@@ -1,7 +1,7 @@
 @extends('vendor.machiko.machiko_template')
-
 @section('css')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+
+<link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
 @endsection
 @section('content')
 <div class="single-product-area">
@@ -76,7 +76,7 @@
                                                        <td class="product-quantity">
                                                             <div class="quantity buttons_added">
                                                                 
-                                                                 <input id="jumlah" value="{{ $row->jumlah }}" style="width:70px" readonly>
+                                                                <input type="text" value="{{ $row->jumlah }}">
                                                                 
                                                             </div>
                                                         </td>
@@ -108,9 +108,6 @@
                                     </div>                        
                                 </div>                    
                             </div>
-                            <div class="col-md-3">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('keranjang') }}">Kembali ke keranjang</a>
-                          </div>
                 <form class="form-horizontal" action="#" method="post">  
                     <input type="text" class="form-control" id="level" name="nama_produk" value="{{$data->level}}">
                     <div class="form-group">
@@ -158,7 +155,7 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title"></h4>
+                                      <h4 class="modal-title">Upgrade user</h4>
                                     </div>
                                     <div class="modal-body">
                                       <input type="hidden" class="form-control" id="id" name="iduser" value="{{$data->id}}">
@@ -270,28 +267,20 @@
     function a(){
       var option=document.getElementById('pesan').value;
       var level=document.getElementById('level').value;
-      console.log(level);
-      var jumlah=document.getElementById('jumlah').value;
-      console.log(jumlah);
+      if(level=="Dropshipper" && option!="Dropshipper"){
+        $('#modal2').modal('show');
+        var setlevel=document.getElementById('getlevel');
+        setlevel.value=option;
+      }
       if(level=="Customer" && option!="Customer"){
         $('#modal').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
-      }if(level=="Dropshipper" && option!="Dropshipper"){
-        
-        $('#modal2').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        
-        setlevel.value=option;
-      }if(level=="Reseller" && option!="Reseller"){
-        
-        $('#modal2').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        
-        setlevel.value=option;
       }
-      else {
-        $('#modal2').modal('hide');
+      if(level=="Reseller" && option!="Reseller"){
+        $('#modal2').modal('show');
+        var setlevel=document.getElementById('getlevel');
+        setlevel.value=option;
       }
     }
              

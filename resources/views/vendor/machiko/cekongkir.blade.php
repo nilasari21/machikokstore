@@ -1,8 +1,6 @@
 @extends('vendor.machiko.machiko_template')
 
-@section('css')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-@endsection
+
 @section('content')
 <div class="single-product-area">
     <div class="zigzag-bottom">
@@ -139,21 +137,7 @@ $('#autocomplete2').autocomplete({
 });
 </script>
 
- <script type="text/javascript">
-    function a(){
-      var option=document.getElementById('pesan').value;
-      var level=document.getElementById('level').value;
-      if(option!="Customer"){
-        $('#modal').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-      }else{
-        $('#modal').modal('hide');
-      }
-    }
-             
-        
-    </script>
+
 <script type="text/javascript">
 function getOngkir() {
       event.preventDefault();
