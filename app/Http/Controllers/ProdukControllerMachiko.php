@@ -17,6 +17,8 @@ class ProdukControllerMachiko extends Controller {
         $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
                 ->select('produk.*','kategori_produk.*')
                 // ->where('produk.status','=','Ready Stock')
+                ->GROUPBY('produk.id')
+                
                 ->get();
         $kategori = Kategori::where('kategori_produk.status','=','Aktif')
                 ->get();

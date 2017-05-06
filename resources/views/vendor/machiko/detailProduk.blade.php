@@ -53,6 +53,9 @@
              <p style="font-family:Roboto">Berat : {{ $data->berat }} gram
              
              </p>
+             <p style="font-family:Roboto">Minimal beli oleh reseller : {{ $data->minimal_beli }} item
+             
+             </p>
 
             <span>
                 <form method="POST"  action="{{ url('keranjang/tambah') }}">

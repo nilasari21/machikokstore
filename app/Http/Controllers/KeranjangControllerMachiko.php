@@ -22,6 +22,7 @@ class KeranjangControllerMachiko extends Controller {
                          ->where('user_id','=','2')
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
+                         // dd($data);
         // $data->ukuran= new ProdukUkuran;
         /*$ukuran= ProdukUkuran::join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->where('produk_ukuran.produk_id','=','keranjang.produk_id'

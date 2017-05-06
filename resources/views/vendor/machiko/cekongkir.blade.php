@@ -1,5 +1,8 @@
 @extends('vendor.machiko.machiko_template')
+@section('css')
 
+<link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
+@endsection
 
 @section('content')
 <div class="single-product-area">
@@ -35,15 +38,15 @@
                        <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Kota tujuan</label>
                       <div class="col-sm-8">
-                          <input type="text" placeholder="ex : Bandung" name="kotatujuan" required="" id="autocomplete2" class="form-control"/>
-                          <input type="hidden" name="kota_tujuan" value="" />
+                          <input type="text" placeholder="ex : Bandung" name="kota" required="" id="autocomplete" class="form-control"/>
+                          <input type="text" id="kota_asal" name="kota_asal" value="" />
 
                         </div>
                       </div>
                        <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Berat</label>
                       <div class="col-sm-5">
-                          <input type="text" placeholder="ex :1700" name="berat" required="" autocomplete="off" class="form-control"/>
+                          <input type="text" placeholder="ex :1700" name="berat" id="berat" required="" autocomplete="off" class="form-control"/>
                          </div>
                      
                         <p>gram</p>
@@ -55,14 +58,13 @@
                          <div class="row" style="width: 500px; height: 50px; margin-left: 100px;">
                            <div class="radio-inline">
                           <label>
-                           <input type="radio" name="courier" id="optionsRadios1" value="jne" checked>
+                           <input type="radio" class="radio" name="optionsRadio" id="optionsRadios1" value="jne" >
                              JNE
                            </label>
                             </div>
-
                             <div class="radio-inline">
                           <label>
-                           <input type="radio" name="courier" id="optionsRadios1" value="pos" checked>
+                           <input type="radio" class="radio"name="optionsRadio" id="optionsRadios1" value="pos" >
                             POS
                            </label>
                             </div>
@@ -73,16 +75,18 @@
                       <div class="form-group">
                       
                       <div class="col-sm-8" style="padding-left:25%">
-                         <button type="submit" class="btn btn-default" onChange="getOngkir()" style="background:#66CC99">Cek Tarif</button>
+                         <button type="submit" class="btn btn-default" onClick="getOngkir()" style="background:#66CC99">Cek Tarif</button>
                         </div>
                       </div>
 
-                   <!--     <div class="form-group">
-                        <div class="col-sm-12">
-                        <table cellspacing="0" id="ongkos" class="shop_table cart" style="width:100%;align:center" >
+                       <div class="form-group">
+                         <div class="col-sm-2">
+                      </div>
+                        <div class="col-sm-8">
+                        <table cellspacing="0"  class="shop_table cart" style="width:100%;align:center" >
                           <thead >
                             <tr >
-                              <th class="product-name" style="background:#66CC99;font-family:Raleway">Kurir</th>
+                              
                               <th class="product-price" style="background:#66CC99;font-family:Raleway">Jenis</th>
                               <th class="product-quantity" style="background:#66CC99;font-family:Raleway">Deskripsi</th>
                               <th class="product-price" style="background:#66CC99;font-family:Raleway">Estimasi sampai</th>
@@ -90,7 +94,7 @@
                               
                             </tr>
                           </thead>
-                        <tbody>
+                        <tbody id="ongkos">
                           <tr>
                               <td colspan="9">
                                                             
@@ -100,7 +104,7 @@
                       </tbody>
                     </table>
                   </div>
-                       </div> -->
+                       </div>
                 </form>   
                 
   </div>
@@ -126,27 +130,19 @@ $('#autocomplete').autocomplete({
     }
 });
 });
-
-$(document).ready(function () {
-$('#autocomplete2').autocomplete({
-    lookup: dataCities,
-    onSelect: function (suggestion) {
-        $("input[name=kota_tujuan]").val(suggestion.data);
-    }
-});
-});
 </script>
-
-
 <script type="text/javascript">
 function getOngkir() {
       event.preventDefault();
 
-      var kota_asal = $('#kota').val();
-      var kota_tujuan = $('#kota_tujuan').val();
-      // var radio = $('input[name=optionsRadio]:checked', '.radio').val();
+      //var kota_asal = $('#kota').val();
+      var kota_tujuan = $('#kota_asal').val();
+      console.log(kota_tujuan);
+      var berat =$('#berat').val();
+       var radio = $('input[name=optionsRadio]:checked', '.radio-inline').val();
+       console.log(radio)
       var service, des, etd, value;
-       $.get("kurir/"+kota_tujuan+"/"+'jne',
+       $.get("cekongkir/hasil/"+kota_tujuan+"/"+radio+"/"+berat,
         function(hasil){
             $('#ongkos').empty();
             $.each(hasil, function(index, hasil){
@@ -160,11 +156,11 @@ function getOngkir() {
                   $.each(hasil.cost, function(index, hasil){
                     console.log(service);
                     $('#ongkos').append(
-                    '<tr><td><input type="radio" name="ongkir" value="'+hasil.value+'" class="ongkir"></td>'+
-                    '<td style="color:#000">'+service+' '+'</td>'+
+                    
+                    '<tr><td style="color:#000">'+service+' '+'</td>'+
                     '<td>'+des+'</td>'+
                     '<td>'+hasil.etd+'</td>'+
-                    '<td>'+formatNumber(hasil.value)+'</td></tr>'
+                    '<td>'+(hasil.value)+'</td></tr>'
                     );
                   }); 
                 }); 

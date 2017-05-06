@@ -9,7 +9,7 @@ use App\Models\Kategori;
 use App\Models\Metode;
 use App\Models\Ukuran;
 use Image;
-cause Illuminate\Support\Fades\Input;
+// cause Illuminate\Support\Fades\Input;
 use App\Models\ProdukUkuran;
 
 

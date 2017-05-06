@@ -30,7 +30,7 @@
 
     <!-- dropzone -->
     <link rel="stylesheet" href="{{asset("dropzone/dropzone.css")}}">
-    <link href="{{asset("vendor/adminlite/plugins/fileinput/fileinput.min.css")}}" rel="stylesheet" type="text/css" />
+    <link  rel="stylesheet" type="text/css" href="{{asset("vendor/machikoo/fileinput/css/fileinput.min.css")}}" />
     @yield('css')
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -73,8 +73,10 @@
     
    
     <!-- Latest jQuery form server -->
-    <script src="{{asset("https://code.jquery.com/jquery.min.js")}}"></script>
+    <!--<script src="{{asset("https://code.jquery.com/jquery.min.js")}}"></script>-->
     
+    <script src="{{asset("https://code.jquery.com/jquery-3.2.1.min.js")}}"></script>
+    <!--<script src="{{asset("https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js")}}"></script>-->
     <!-- Bootstrap JS form CDN -->
     <script src="{{asset("http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")}}"></script>
     
@@ -92,7 +94,7 @@
 
     <!-- upload gambar -->
     <script src="{{asset("dropzone/dropzone.js")}}"></script>
-    <script src="{{asset("vendor/adminlte/plugins/fileinput/fileinput.min.js")}}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{asset("vendor/machikoo/fileinput/js/fileinput.min.js")}}" ></script>
 
      </script>
 @yield('js')

@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
 @endsection
 @section('content')
+
 <div class="single-product-area">
     <div class="zigzag-bottom">
     </div>
@@ -34,13 +35,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                   @foreach ($keranjang as $row)
+                                                   @foreach ($keranjang as $b)
+                                                     @php
+                                                    $i=1
+                                                    @endphp 
                                                     <tr class="cart_item">
                                                        <td class="product-name">
-                                                            <a href="#">{{ $row->nama_produk }}</a> 
+                                                            <a href="#">{{ $b->nama_produk }}</a> 
+
                                                         </td>
                                                        <?php 
-                                                           if(count($row->nama_ukuran)==0){
+                                                           if(count($b->nama_ukuran)==0){
                                                             ?>
                                                             <td class="product-price">
                                                                 <span class="amount">-</span> 
@@ -48,19 +53,16 @@
                                                        <?php
                                                        }else{ ?>
                                                        <td class="product-price">
-                                                            <span class="amount">{{ $row->nama_ukuran }}</span> 
+                                                            <span class="amount">{{ $b->nama_ukuran }}</span> 
                                                         </td>
                                                         <?php
                                                        }
                                                        ?>
-                                                        
-                                                       
-                                                        
-                                                         <td class="product-price">
-                                                            <span class="amount"  >{{ $row->harga }}</span> 
+                                                       <td class="product-price">
+                                                            <span class="amount"  >{{ $b->harga }}</span> 
                                                         </td>
                                                         <?php 
-                                                           if(count($row->nama_ukuran)==0){
+                                                           if(count($b->nama_ukuran)==0){
                                                             ?>
                                                             <td class="product-price">
                                                                 <span class="amount" >0</span> 
@@ -68,7 +70,7 @@
                                                        <?php
                                                        }else{ ?>
                                                         <td class="product-price">
-                                                            <span class="amount" >{{ $row->harga_tambah }}</span> 
+                                                            <span class="amount" >{{ $b->harga_tambah }}</span> 
                                                         </td>
                                                         <?php
                                                        }
@@ -76,31 +78,36 @@
                                                        <td class="product-quantity">
                                                             <div class="quantity buttons_added">
                                                                 
-                                                                <input type="text" value="{{ $row->jumlah }}">
+                                                                <input type="text" id="jumlah{{$i}}" value="{{ $b->jumlah }}" readonly>
+                                                                <input type="hidden" id="minimal_beli{{$i}}" value="{{ $b->minimal_beli }}">
                                                                 
                                                             </div>
                                                         </td>
                                                         <td class="product-name">
-                                                            <span class="amount" >{{ $row->berat_total }} gram</span> 
+                                                            <span class="amount" >{{ $b->berat_total }} gram</span> 
                                                         </td>
                                                        <td class="product-subtotal" >
-                                                            <span class="amount" >{{ $row->Total_harga }}</span> 
+                                                            <span class="amount" >{{ $b->Total_harga }}</span> 
                                                         </td>
                                                     </tr>
-                                                    
-                                                    @endforeach
-                                                   
+                                                    @php
+                                                    $i++
+                                                    @endphp                                                    
+                                                    @endforeach 
+                                                   @foreach($beratharga as $b)
                                                      <tr>
                                                         <td colspan="9">
-                                                            <strong>Berat total</strong>
-                                                            {{ $row->berat }} gram
+                                                            <label>Berat total</label>
+                                                            <input type="text" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>
+                                                            gram
                                                         </td>                                                            
                                                     </tr>
-                                                        
-
+                                                     @endforeach
+                                                    
                                                     
                                                 </tbody>
                                             </table>
+                                            
                                         </div>
                                         </form>
 
@@ -110,6 +117,8 @@
                             </div>
                 <form class="form-horizontal" action="#" method="post">  
                     <input type="text" class="form-control" id="level" name="nama_produk" value="{{$data->level}}">
+                    
+                    <input type="text" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
                     <div class="form-group">
                      <!--  <div class="col-sm-3 control-label"> -->
                       <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>  
@@ -118,9 +127,10 @@
                         <select class="form-control" style="width: 100%;" id="pesan" name="jenis_pesan" onChange="a()" data-toggle="modal" required/>
                             <option>Pilih jenis pemesanan</option>
                               <option value="Customer">Customer biasa</option>
-                              <option value="Reseller">Reseller</option>
+                              <option value="Reseller" >Reseller</option>
                               <option value="Dropshipper">Dropshipper</option>
                         </select>
+
                         <!-- modal -->
                           <div class="modal fade" id="modal" role="dialog">
                                 <div class="modal-dialog">
@@ -135,7 +145,8 @@
                                       <input type="hidden" class="form-control" id="id" name="iduser" value="{{$data->id}}">
                                       <input type="hidden" class="form-control" id="getlevel" name="iduser" value="">
                                       <p>Anda menggunakan pemesanan tidak sesuai dengan level user anda. Apakah anda ingin mengupgrade level user?</p>
-                                      <p style="font-size:12px">Catatan: Perubahan level user memerlukan persetujuan admin. Selama perubahan belum disetujui, anda hanya bisa menggunakan jenis pemesaan Customer biasa</p>
+                                      <p style="font-size:12px">Catatan: Perubahan level user memerlukan persetujuan admin. Mohon tunggu sampai admin menyetujui permintaan perubaha level.
+                                        Pembayaran hanya dapat dilakukan apabila permintaan telah disetujui.</p>
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
@@ -155,7 +166,7 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Upgrade user</h4>
+                                      <h4 class="modal-title">Pemberitahuan</h4>
                                     </div>
                                     <div class="modal-body">
                                       <input type="hidden" class="form-control" id="id" name="iduser" value="{{$data->id}}">
@@ -164,6 +175,35 @@
                                       <p >Jika anda tetap memilih pilihan ini, anda harus menunggu persetujuan admin terlebih dahulu agar dapat melakukan pembayaran.
                                       </p>
                                       <p style="font-size:12px">Jika anda memilih Reseller, total pembayaran akan dihitung oleh admin (untuk mendapat potongan harga)
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
+                                      
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                              <!-- end of modal -->
+                               <!-- modal -->
+                          <div class="modal fade" id="modal3" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Pemberitahuan</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      <input type="hidden" class="form-control" id="id" name="iduser" value="{{$data->id}}">
+                                      <input type="hidden" class="form-control" id="getlevel" name="iduser" value="">
+                                      <p>Anda menggunakan pemesanan tidak sesuai dengan level user anda.</p>
+                                      <p >Jika anda tetap memilih pilihan ini, anda harus menunggu persetujuan admin terlebih dahulu agar dapat melakukan pembayaran setelah anda melakukan <i>checkout</i>.
+                                      </p>
+                                      <p>Reseller memiliki minimal pembelian tiap  barang. Jumlah barang anda tidak sesuai minimal pembelian. silahkan kembali ke keranjang
+                                        atau gunakan jenis pemesanan lain.
+                                      
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
@@ -196,7 +236,8 @@
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
                       <div class="col-sm-8">
                           <textarea style="border: 1px;width:100%;" disabled >{{$data->nama_penerima}}, {{$data->no_hp_penerima}}, {{$data->provinsi}}, {{$data->kabupaten}}, {{$data->kecamatan}}, {{$data->alamat_lengkap}}</textarea>
-
+                          <input type="text" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data->kabupaten}}" class="form-control"/>
+                          <input type="text" id="kota_asal"  name="kota_asal" value="" />
                         </div>
                         </div>
 
@@ -238,15 +279,62 @@
                       <div class="col-sm-3 control-label">
                       </div>
                       <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" name="jenis_kelamin" required/>
-                            <option>Pilih kurir</option>
-                              <option value="jne">JNE</option>
-                              <option value="pos">POS</option>
-                        </select>
+                        <div class="row" style="width: 500px; height: 50px; margin-left: 100px;">
+                           <div class="radio-inline" onChange="getOngkir()">
+                          <label>
+                           <input type="radio" class="radio" name="optionsRadio" id="optionsRadios1" value="jne" >
+                             JNE
+                           </label>
+                            </div>
+                            <div class="radio-inline" onChange="getOngkir()">
+                          <label>
+                           <input type="radio" class="radio"name="optionsRadio" id="optionsRadios1" value="pos" >
+                            POS
+                           </label>
+                            </div>
+
+                           </div>
                       </div>
+                      <div class="col-sm-12">
+                        <div class="col-sm-2">
+                      </div>
+                        <div class="col-sm-8">
+
+                        <table cellspacing="0"  class="shop_table cart" style="width:100%;align:center" >
+                          <thead >
+                            <tr >
+                              <th class="product-price" style="background:#66CC99;font-family:Raleway">&nbsp;</th>
+                              <th class="product-price" style="background:#66CC99;font-family:Raleway">Jenis</th>
+                              <th class="product-quantity" style="background:#66CC99;font-family:Raleway">Deskripsi</th>
+                              <th class="product-price" style="background:#66CC99;font-family:Raleway">Estimasi sampai</th>
+                              <th class="product-price" style="background:#66CC99;font-family:Raleway">Harga</th>
+                              
+                            </tr>
+                          </thead>
+                        <tbody id="ongkos">
+                          <tr>
+                              <td colspan="9">
+                                                            
+                                   Belum Cek ongkir                         
+                            </td>
+                          </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                      </div>
+                      
                       
                     </div>
                     
+                    @foreach($beratharga as $d)
+                    <div class="form-group">
+                      <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control" id="id" name="iduser" value="Rp {{$d->total}},00" readonly>
+                      </div>
+                      
+                    </div>
+                    @endforeach
                     
                     </div>
                       <div class="form-group">
@@ -263,28 +351,128 @@
 @endsection
 
 @section('js')
+
     <script type="text/javascript">
     function a(){
+                                                          @php
+                                                    $i=1
+                                                    @endphp 
+      
       var option=document.getElementById('pesan').value;
+      console.log(option);
       var level=document.getElementById('level').value;
-      if(level=="Dropshipper" && option!="Dropshipper"){
+      var jumlah = $('#jumlah{{$i}}').val();
+      console.log(jumlah);
+      var minimal_beli = $('#minimal_beli{{$i}}').val();
+      console.log(minimal_beli);
+      if(level=="Dropshipper" && option=="Customer"){
         $('#modal2').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
       }
-      if(level=="Customer" && option!="Customer"){
+      if(level=="Customer" && option=="Dropshipper"){
         $('#modal').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
       }
-      if(level=="Reseller" && option!="Reseller"){
+      if(level=="Reseller" && option!="Reseller" ){
         $('#modal2').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
       }
+      if(level=="Customer" && option=="Reseller" && jumlah != minimal_beli ){
+        $('#modal3').modal('show');
+        var setlevel=document.getElementById('getlevel');
+        setlevel.value=option;
+      }
+      if(level=="Dropshipper" && option=="Reseller" && jumlah != minimal_beli ){
+        $('#modal3').modal('show');
+        var setlevel=document.getElementById('getlevel');
+        setlevel.value=option;
+      }
+      if(level=="Customer" && option=="Reseller" && jumlah == minimal_beli ){
+        $('#modal').modal('show');
+        var setlevel=document.getElementById('getlevel');
+        setlevel.value=option;
+      }
+      if(level=="Dropshipper" && option=="Reseller" && jumlah == minimal_beli ){
+        $('#modal2').modal('show');
+        var setlevel=document.getElementById('getlevel');
+        setlevel.value=option;
+      }
+       if(level=="Customer" && option=="Customer" ){
+        $('#modal3').modal('hide');
+        
+      }
+      if(level=="Dropshipper" && option=="Dropshipper" ){
+        $('#modal3').modal('hide');
+        
+      }
+                                                          @php
+                                                    $i++
+                                                    @endphp 
+     
     }
              
         
     </script>
+    <<script type="text/javascript">
+$(document).ready(function (){
+      
 
+      var kota_asal = $('#kota').val();
+       $.get("getId/"+kota_asal,
+        function(hasil){
+          $.each(hasil, function(index, hasil){
+            $('#kota_asal').empty();
+            
+                $('#kota_asal').val(hasil.city_id)
+              console.log(hasil.city_id);
+              });
+          });
+            });
+</script>
+<script type="text/javascript">
+function getOngkir() {
+      event.preventDefault();
+
+      //var kota_asal = $('#kota').val();
+      var id = $('#user').val();
+      console.log(id);
+      var kota_tujuan = $('#kota_asal').val();
+      console.log(kota_tujuan);
+      var berat =$('#berat').val();
+       var radio = $('input[name=optionsRadio]:checked', '.radio-inline').val();
+       console.log(radio)
+      var service, des, etd, value;
+       $.get("hasil/"+kota_tujuan+"/"+radio+"/"+berat,
+        function(hasil){
+            $('#ongkos').empty();
+            $.each(hasil, function(index, hasil){
+              console.log(hasil.costs.length);
+              if(hasil.costs.length == 0){
+                $('#ongkos').append('<p>Pengiriman dari Yogyakarta Tidak Tersedia</p>')
+              }else{
+                $.each(hasil.costs, function(index, hasil){
+                  service = hasil.service;
+                  des = hasil.description;
+                  $.each(hasil.cost, function(index, hasil){
+                    console.log(service);
+                    $('#ongkos').append(
+                     '<tr><td><input type="radio" name="ongkir" value="'+hasil.value+'" class="ongkir"></td>'+
+                    '<td style="color:#000">'+service+' '+'</td>'+
+                    '<td>'+des+'</td>'+
+                    '<td>'+hasil.etd+'</td>'+
+                    '<td>'+(hasil.value)+'</td></tr>'
+                    );
+                  }); 
+                }); 
+              }
+            }); 
+            
+        });
+    };
+</script>
     @endsection
+
+

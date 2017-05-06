@@ -49,4 +49,8 @@ Route::post('testimoni/simpan', 'TestimoniControllerMachiko@simpan');
 Route::get('checkout/{id}', 'TransaksiControllerMachiko@checkout');
 
 Route::get('cekongkir', 'CekongkirControllerMachiko@index');
-Route::post('cekongkir/hasil', 'CekongkirControllerMachiko@hasil');
+Route::get('cekongkir/hasil/{kota_tujuan}/{radio}/{berat}', 'CekongkirControllerMachiko@hasil');
+
+Route::get('hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerMachiko@hasil');
+Route::get('checkout/getId/{kota_asal}', 'TransaksiControllerMachiko@getId');
+Route::get('checkout/hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerMachiko@hasil');

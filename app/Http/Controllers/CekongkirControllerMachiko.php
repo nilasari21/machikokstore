@@ -17,19 +17,19 @@ class CekongkirControllerMachiko extends Controller {
         return view('vendor.machiko.cekongkir')->with('data',$data);
 
     }
-    public function hasil(Request $request) {
+    public function hasil($kota_tujuan,$radio,$berat) {
         $data = RajaOngkir::Kota()->all();
 
        
         $hasil = RajaOngkir::Cost([
             'origin'        => 501, // id kota asal
-            'destination'   => $request->kota_tujuan, // id kota tujuan
-            'weight'        => $request->berat, // berat satuan gram
-            'courier'       => $request->courier, // kode kurir pengantar ( jne / tiki / pos )
+            'destination'   => $kota_tujuan, // id kota tujuan
+            'weight'        => $berat, // berat satuan gram
+            'courier'       => $radio, // kode kurir pengantar ( jne / tiki / pos )
         ])->get();
          
         // return $hasil;
-        return view('vendor.machiko.cekongkir2')->with(compact('hasil',$hasil,'data',$data));
+        return $hasil;
 
     }
         // $data=[];

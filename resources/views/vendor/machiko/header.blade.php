@@ -35,7 +35,7 @@
                         <li><a href="{{ url('machikokstore') }}">Produk</a></li>
                         <li ><a href="{{ url('cekongkir') }}">Ongkos Kirim</a></li>
                         <li><a href="{{ url('testimoni') }}">Testimoni</a></li>
-                        <!-- <li><a href="#">Tentang Kami</a></li> -->
+                        <li><a href="#">Tentang Kami</a></li>
                         <li><a href="#">Bantuan</a></li>
                         <li>
                             <!-- <div class="col-sm-4" style="margin-top:40px;font-family:Titillium Web; padding:0px"> -->
