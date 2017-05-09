@@ -77,8 +77,8 @@
                                                        ?>
                                                        <td class="product-quantity">
                                                             <div class="quantity buttons_added">
-                                                                
-                                                                <input type="text" id="jumlah{{$i}}" value="{{ $b->jumlah }}" readonly>
+                                                                {{ $b->jumlah }}
+                                                                <input type="hidden" id="jumlah{{$i}}" value="{{ $b->jumlah }}" readonly>
                                                                 <input type="hidden" id="minimal_beli{{$i}}" value="{{ $b->minimal_beli }}">
                                                                 
                                                             </div>
@@ -89,7 +89,7 @@
                                                        <td class="product-subtotal" >
                                                             <span class="amount" >{{ $b->Total_harga }}</span> 
                                                         </td>
-                                                    </tr>
+                                                    </tr></tr>
                                                     @php
                                                     $i++
                                                     @endphp                                                    
@@ -97,9 +97,12 @@
                                                    @foreach($beratharga as $b)
                                                      <tr>
                                                         <td colspan="9">
-                                                            <label>Berat total</label>
-                                                            <input type="text" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>
-                                                            gram
+                                                            
+                                                              
+                                                                <label>Berat total</label>   {{ $b->berat }} gram
+                                                            
+                                                          
+                                                            
                                                         </td>                                                            
                                                     </tr>
                                                      @endforeach
@@ -115,15 +118,18 @@
                                     </div>                        
                                 </div>                    
                             </div>
-                <form class="form-horizontal" action="#" method="post">  
+                <form class="form-horizontal" action="{{ url('checkout/simpan') }}" method="post">
+                  {{ csrf_field() }}
+                <input type="hidden" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>  
                     <input type="text" class="form-control" id="level" name="nama_produk" value="{{$data->level}}">
                     
-                    <input type="text" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
+                    <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
                     <div class="form-group">
                      <!--  <div class="col-sm-3 control-label"> -->
                       <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>  
                       <!-- </div> -->
                       <div class="col-sm-4">
+                        <input type="text" class="form-control" id="status" name="status" value="">
                         <select class="form-control" style="width: 100%;" id="pesan" name="jenis_pesan" onChange="a()" data-toggle="modal" required/>
                             <option>Pilih jenis pemesanan</option>
                               <option value="Customer">Customer biasa</option>
@@ -142,8 +148,8 @@
                                       <h4 class="modal-title">Upgrade user</h4>
                                     </div>
                                     <div class="modal-body">
-                                      <input type="hidden" class="form-control" id="id" name="iduser" value="{{$data->id}}">
-                                      <input type="hidden" class="form-control" id="getlevel" name="iduser" value="">
+                                      <input type="text" class="form-control" id="id" name="iduser" value="{{$data->id}}">
+                                      <input type="text" class="form-control" id="getlevel" name="iduser" value="">
                                       <p>Anda menggunakan pemesanan tidak sesuai dengan level user anda. Apakah anda ingin mengupgrade level user?</p>
                                       <p style="font-size:12px">Catatan: Perubahan level user memerlukan persetujuan admin. Mohon tunggu sampai admin menyetujui permintaan perubaha level.
                                         Pembayaran hanya dapat dilakukan apabila permintaan telah disetujui.</p>
@@ -216,7 +222,7 @@
                               <!-- end of modal -->
                             </div> 
                         <div class="col-sm-4"  id="toko">
-                          <input type="text" class="form-control" name="nama_produk" placeholder="Nama Toko" >
+                          <input style="display:none" type="text" class="form-control" id="nama_toko" name="nama_toko" placeholder="Nama Toko" >
                         </div>                    
                       </div>
 
@@ -235,9 +241,10 @@
                       <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
                       <div class="col-sm-8">
-                          <textarea style="border: 1px;width:100%;" disabled >{{$data->nama_penerima}}, {{$data->no_hp_penerima}}, {{$data->provinsi}}, {{$data->kabupaten}}, {{$data->kecamatan}}, {{$data->alamat_lengkap}}</textarea>
-                          <input type="text" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data->kabupaten}}" class="form-control"/>
-                          <input type="text" id="kota_asal"  name="kota_asal" value="" />
+                          <input type="hidden" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data->id_penerima}}" class="form-control"/>
+                          <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$data->nama_penerima}}&#13;&#10;{{$data->no_hp_penerima}},&#13;&#10;{{$data->alamat_lengkap}},{{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}} </textarea>
+                          <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data->kabupaten}}" class="form-control"/>
+                          <input type="hidden" id="kota_asal"  name="kota_asal" value="" />
                         </div>
                         </div>
 
@@ -245,11 +252,11 @@
                       <div class="col-sm-3 control-label">
                       </div>
                       <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" name="jenis_kelamin" />
+                        <select class="form-control" style="width: 100%;" onChange="getAlamat()" id="alamat_pilih" name="alamat_pilih" />
                             <option>Pilih alamat lain</option>
                               @foreach($penerima as $row)
-                                    <option value="{{$row->id_penerima}}" >
-                                        {{$row->nama_alamat}}({{$row->nama_penerima}}/{{$row->alamat_lengkap}})
+                                    <option value="{{$row->kabupaten}}" >
+                                        {{$row->nama_alamat}}
                                     </option>
                               @endforeach
                         </select>
@@ -330,7 +337,8 @@
                     <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control" id="id" name="iduser" value="Rp {{$d->total}},00" readonly>
+                        <input type="hidden" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
+                        <input type="text" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
                       </div>
                       
                     </div>
@@ -339,7 +347,7 @@
                     </div>
                       <div class="form-group">
                         <div class="col-sm-offset-5 col-sm-2">
-                            <button type="submit" class="btn btn-success btn-block">Daftar</button>
+                            <button type="submit" class="btn btn-success btn-block" style="background:#66CC99;font-family:Raleway">Checkout</button>
                         </div>
                     </div>
                 </form>   
@@ -365,47 +373,102 @@
       console.log(jumlah);
       var minimal_beli = $('#minimal_beli{{$i}}').val();
       console.log(minimal_beli);
+      
       if(level=="Dropshipper" && option=="Customer"){
         $('#modal2').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+        document.getElementById('nama_toko').style.display = 'none';
       }
       if(level=="Customer" && option=="Dropshipper"){
         $('#modal').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+         document.getElementById('nama_toko').style.display = 'block';
       }
-      if(level=="Reseller" && option!="Reseller" ){
+      if(level=="Reseller" && option=="Customer" ){
         $('#modal2').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+        document.getElementById('nama_toko').style.display = 'none';
+      }
+      if(level=="Reseller" && option=="Dropshipper" ){
+        $('#modal2').modal('show');
+        var setlevel=document.getElementById('getlevel');
+        setlevel.value=option;
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+        document.getElementById('nama_toko').style.display = 'block';
       }
       if(level=="Customer" && option=="Reseller" && jumlah != minimal_beli ){
         $('#modal3').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+        document.getElementById('nama_toko').style.display = 'none';
       }
       if(level=="Dropshipper" && option=="Reseller" && jumlah != minimal_beli ){
         $('#modal3').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
+        status.value="Tunda";var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+        document.getElementById('nama_toko').style.display = 'none';
       }
       if(level=="Customer" && option=="Reseller" && jumlah == minimal_beli ){
         $('#modal').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+        document.getElementById('nama_toko').style.display = 'none';
       }
       if(level=="Dropshipper" && option=="Reseller" && jumlah == minimal_beli ){
         $('#modal2').modal('show');
         var setlevel=document.getElementById('getlevel');
         setlevel.value=option;
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Tunda";
+        document.getElementById('nama_toko').style.display = 'none';
       }
        if(level=="Customer" && option=="Customer" ){
         $('#modal3').modal('hide');
-        
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Terima";
+        document.getElementById('nama_toko').style.display = 'none';
       }
       if(level=="Dropshipper" && option=="Dropshipper" ){
         $('#modal3').modal('hide');
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Terima";
+        document.getElementById('nama_toko').style.display = 'block';
+
+        
+      }
+      if(level=="Reseller" && option=="Reseller" ){
+        $('#modal3').modal('hide');
+        var status_pesan = document.getElementById('status');
+        console.log(status_pesan);
+        status_pesan.value="Terima";
+        document.getElementById('nama_toko').style.display = 'none';
+
         
       }
                                                           @php
@@ -416,7 +479,7 @@
              
         
     </script>
-    <<script type="text/javascript">
+    <script type="text/javascript">
 $(document).ready(function (){
       
 
@@ -431,6 +494,47 @@ $(document).ready(function (){
               });
           });
             });
+</script>
+<script type="text/javascript">
+function idalamat() {
+      event.preventDefault();
+      
+
+      var kota_asal = $('#kota').val();
+      // console.log(kota_asal);
+       $.get("getId/"+kota_asal,
+        function(hasil){
+          $.each(hasil, function(index, hasil){
+            $('#kota_asal').empty();
+            
+                $('#kota_asal').val(hasil.city_id)
+              console.log(hasil.city_id);
+              });
+          });
+            };
+</script>
+    <script type="text/javascript">
+function getAlamat() {
+      event.preventDefault();
+      
+
+      var alamat = $('#alamat_pilih').val();
+      var kota_asal = $('#kota').val();
+       $.get("getAlamat/"+alamat,
+        function(hasil){
+          $.each(hasil, function(index, hasil){
+            // $.each(hasil, function(index, hasil){
+            $('#alamat').empty();
+            
+                $('#alamat').val(hasil.nama_penerima+'\n'+hasil.no_hp_penerima+'\n'+hasil.alamat_lengkap+','+hasil.kecamatan+','+hasil.kabupaten+','+hasil.provinsi);
+                $('#kota').val(hasil.kabupaten);
+                $('#idpenerima').val(hasil.id_penerima);
+                $('#kota_asal').val(idalamat())
+              console.log(hasil);
+              // });
+            });
+          });
+            };
 </script>
 <script type="text/javascript">
 function getOngkir() {
@@ -459,11 +563,13 @@ function getOngkir() {
                   $.each(hasil.cost, function(index, hasil){
                     console.log(service);
                     $('#ongkos').append(
-                     '<tr><td><input type="radio" name="ongkir" value="'+hasil.value+'" class="ongkir"></td>'+
+                      
+                     '<tr><td><input type="radio" id="ongkir" name="ongkir" onChange="getTotal()" value="'+hasil.value+'" class="ongkir"></td>'+
                     '<td style="color:#000">'+service+' '+'</td>'+
                     '<td>'+des+'</td>'+
                     '<td>'+hasil.etd+'</td>'+
                     '<td>'+(hasil.value)+'</td></tr>'
+                     
                     );
                   }); 
                 }); 
@@ -473,6 +579,37 @@ function getOngkir() {
         });
     };
 </script>
+<script type="text/javascript">
+            function getTotal() {
+      event.preventDefault();
+            
+            
+         /* @php
+            $i=1;
+            
+            @endphp
+            var  hasil=0;
+            
+            @foreach ($data as $row)*/
+            var total1 = document.getElementById("total1").value; 
+            console.log(total1);
+            var ongkir = $('input[name=ongkir]:checked', '#ongkos').val(); 
+            console.log(ongkir);
+            var hasil = document.getElementById("total").value=( parseInt(total1)+ parseInt(ongkir));
+
+             console.log(hasil);
+              /*@php
+             $i++;
+             
+             @endphp
+             @endforeach*/
+             
+
+        };
+       
+             
+        
+    </script>
     @endsection
 
 

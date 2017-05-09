@@ -9,7 +9,7 @@
              <div class="col-md-12">
                                 <div class="product-content-right">
                                     <div class="woocommerce">
-                                        <form method="post" action="#" name="autoSumForm">
+                                        <form method="post" action="{{url('keranjang/edit')}}" >
                                             <div class="table-responsive">
                                             <table cellspacing="0" class="shop_table cart" style="width:100%;align:center" >
                                                 <thead >
@@ -26,6 +26,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    
+                                                   
                                                     @php
                                                     $i=1;
                                                     @endphp
@@ -56,9 +58,9 @@
                                                         <?php
                                                        }
                                                        ?>
-                                                        <form method="post" action="{{ url('keranjang/edit/'.$row->id_keranjang) }}">
                                                        
-                                                        
+                                                       {{ csrf_field() }}
+                                                        <input name="idkeranjang[{{$i}}]" type="hidden" id="idkeranjang"  value="{{$row->id_keranjang}}" style="width:100px"readonly>
                                                          <td class="product-price">
                                                             <span class="amount"  ><input type="hidden" id="nilai2{{$i}}" value="{{ $row->harga }}" onFocus="startCalc();" onBlur="stopCalc();">{{ $row->harga }}</span> 
                                                         </td>
@@ -76,10 +78,11 @@
                                                         <?php
                                                        }
                                                        ?>
+
                                                        <td class="product-quantity">
                                                             <div class="quantity buttons_added">
                                                                 
-                                                                <input type="number" id="nilai1{{$i}}" name="jumlah" class="item_quantity" min="1"   value="{{ $row->jumlah }}">
+                                                                <input type="number" id="nilai1{{$i}}" name="jumlah1[]" class="item_quantity" min="1"   value="{{ $row->jumlah }}">
                                                                 
                                                             </div>
                                                         </td>
@@ -99,26 +102,28 @@
                                                             <strong>Total(belum termasuk ongkos kirim)</strong>
                                                             <input name="total" type="text" id="jumlah"  value="" style="width:100px"readonly>
 
-                                                    </tr>
+                                                    <tr>
                                                      <tr>
                                                         <td colspan="9">
                                                             <strong>Berat total</strong>
                                                             <input name="total" type="text" id="total_berat"  value="" style="width:50px" readonly>gram
-                                                            
+                                                            </td>
                                                     <tr>
                                                         <td class="actions" colspan="9">
                                                             <!-- <input type="submit" value="Update Cart" name="update_cart" class="button" style="background:#66CC99"> -->
-                                                            <button type="submit" class="add_to_wishlist">Update keranjanjang</button>
-                                                         </form>
+                                                            <button type="submit" class="add_to_wishlist" style="text-transform: capitalize;height:35px;padding: 5px 5px;">Update keranjang</button>
+                                        
+                                                       </form>
+                                        
                                                         <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/2') }}">Checkout</a>
                                                         </td>
 
                                                     </tr>
-                                                    
+                                                
                                                 </tbody>
                                             </table>
                                         </div>
-                                        </form>
+                                        
 
                                       
                                     </div>                        

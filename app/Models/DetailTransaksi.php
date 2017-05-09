@@ -15,7 +15,7 @@ class DetailTransaksi extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'detail_transaki';
+    protected $table = 'detail_transaksi';
     protected $primaryKey = 'id_detail_transaksi';
     // public $timestamps = false;
     // protected $guarded = ['id'];

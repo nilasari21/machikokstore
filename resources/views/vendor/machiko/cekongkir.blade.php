@@ -39,7 +39,7 @@
                       <label for="inputName" class="col-sm-3 control-label" >Kota tujuan</label>
                       <div class="col-sm-8">
                           <input type="text" placeholder="ex : Bandung" name="kota" required="" id="autocomplete" class="form-control"/>
-                          <input type="text" id="kota_asal" name="kota_asal" value="" />
+                          <input type="hidden" id="kota_asal" name="kota_asal" value="" />
 
                         </div>
                       </div>

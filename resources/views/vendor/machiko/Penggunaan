@@ -1,0 +1,43 @@
+Penggunaan
+
+Ambil data provinsi
+
+$data = RajaOngkir::Provinsi()->all();
+Ambil jumlah provinsi
+
+$data = RajaOngkir::Provinsi()->count();
+Ambil data provinsi berdasarkan id provinsi
+
+$data = RajaOngkir::Provinsi()->find($id);
+Ambil data provinsi berdasarkan nama provinsi
+
+$data = RajaOngkir::Provinsi()->search('province', $name = "ja")->get();
+Ambil data kota
+
+$data = RajaOngkir::Kota()->all();
+Ambil jumlah kota
+
+$data = RajaOngkir::Kota()->count();
+Ambil data kota berdasarkan id kota
+
+$data = RajaOngkir::Kota()->find($id);
+Ambil data kota berdasarkan nama kota
+
+$data = RajaOngkir::Kota()->search('city_name', $name = "banyu")->get();
+Ambil data kota berdasarkan provinsi
+
+$data = RajaOngkir::Kota()->byProvinsi($provinsi_id)->get();
+Ambil jumlah kota berdasarkan provinsi
+
+$data = RajaOngkir::Kota()->byProvinsi($provinsi_id)->count();
+Ambil data kota berdasarkan nama kota di suatu provinsi
+
+$data = RajaOngkir::Kota()->byProvinsi($provinsi_id)->search('city_name', $name)->get();
+Ambil Biaya Pengiriman
+
+$data = RajaOngkir::Cost([
+	'origin' 		=> 501, // id kota asal
+	'destination' 	=> 114, // id kota tujuan
+	'weight' 		=> 1700, // berat satuan gram
+	'courier' 		=> 'jne', // kode kurir pengantar ( jne / tiki / pos )
+])->get();

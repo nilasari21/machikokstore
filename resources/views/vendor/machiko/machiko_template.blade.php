@@ -75,7 +75,8 @@
     <!-- Latest jQuery form server -->
     <!--<script src="{{asset("https://code.jquery.com/jquery.min.js")}}"></script>-->
     
-    <script src="{{asset("https://code.jquery.com/jquery-3.2.1.min.js")}}"></script>
+    <!--<script src="{{asset("https://code.jquery.com/jquery-3.2.1.min.js")}}"></script>-->
+    <script src="{{asset("vendor/machikoo/js/jquery-3.2.1.min.js")}}"></script>
     <!--<script src="{{asset("https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js")}}"></script>-->
     <!-- Bootstrap JS form CDN -->
     <script src="{{asset("http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")}}"></script>

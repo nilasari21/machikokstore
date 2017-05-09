@@ -71,13 +71,19 @@ class KeranjangControllerMachiko extends Controller {
         return redirect('keranjang');
     }
 
-    public function postUpdate($id, Request $request)
+    public function postUpdate(Request $request)
     {
         // proses update data
-        $data = Keranjang::where('id_keranjang','=',$id);
-        $data->jumlah = $request->jumlah;
-        $data->save();
-        // kembali ke halaman daftar mahasiswa
+        $i=1;
+        foreach ($request->jumlah1 as $key ) {
+            $data=Keranjang::where('id_keranjang','=',$request->idkeranjang[$i])->first();
+            $data->jumlah=$key;
+            $data->save();
+            $i++;       
+        }
+        
+        /*$data->jumlah=$request->jumlah1;
+        $data->save();*/
         return redirect('keranjang');
     }
 

@@ -7,7 +7,9 @@ CRUD::resource('ukuran', 'UkuranCrudController');
 
 CRUD::resource('metode', 'MetodeCrudController');
 
-CRUD::resource('testimoni', 'TestimoniCrudController');
+//Route::delete('testimoni', 'TestimoniCrudController@destroy');
+Route::get('testimoni','TestimoniCrudController@index');
+Route::delete('testimoni/{testimoni}','TestimoniCrudController@destroy');
 
 CRUD::resource('preorder', 'PreorderCrudController');
 

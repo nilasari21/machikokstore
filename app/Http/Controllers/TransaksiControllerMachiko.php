@@ -8,7 +8,9 @@ use App\Models\Transaksi;
 use App\Models\Penerima;
 use App\Models\Keranjang;
 use App\Models\Metode;
+use App\Models\DetailTransaksi;
 use DB;
+use Carbon\Carbon;
 use RajaOngkir;
 // use App\Models\Penerima;
 
@@ -98,36 +100,63 @@ class TransaksiControllerMachiko extends Controller {
         return $data;
 
     }
-    /*select metode.metode,count(metode) as jumlah 
-from keranjang 
-INNER join 
-metode_produk ON keranjang.produk_id = metode_produk.produk_id 
-INNER JOIN metode ON metode.id = metode_produk.metode_id
-where keranjang.user_id=2
-GROUP BY metode.metode  
-ORDER BY `jumlah`  DESC*/
-    /*public function tambah(Request $request)
+    public function alamat($alamat) {
+        
+
+       
+       $alamat = Penerima::where('kabupaten','=',$alamat)
+                        /*->select('nama_penerima','no_hp_penerima','provinsi','kabupaten','kecamatan','alamat_lengkap')*/
+                        ->get();
+        $data = RajaOngkir::Kota()->search('city_name', $name = $alamat)->get();
+         
+        // return $hasil;
+        return $alamat;
+
+    }
+    public function tambah(Request $request)
     {
-        
-        $data = new Transaksi; // new Model
-        
-        $data->status_bayar = "Belum_lunas";
-        $data->status_beli = "keranjang";
-        $data->save();
-
-        foreach ($request->id as $key=>$val ) {
-          $ProdukUkuran = new ProdukUkuran();
-          $ProdukUkuran->produk_id = $produk->id;
-          $ProdukUkuran->ukuran_id = $val;
-          $ProdukUkuran->stock = $request->stock_[$key];
-          $ProdukUkuran->harga_tambah= $request->harga_tambah[$key];
-          $ProdukUkuran->save();
+      $transaksi = new Transaksi; 
+     
+      
+      $transaksi->id_user=2;
+      $transaksi->tgl_transaksi= Carbon::now(7);
+      $transaksi->id_metode= $request->metode;
+      $transaksi->total_berat= $request->berat;
+      $transaksi->id_penerima=$request->idpenerima;
+      $transaksi->status_bayar="Belum lunas";
+      $transaksi->jenis_pemesanan=$request->jenis_pesan;
+      $transaksi->status_jenis_pesan=$request->status;
+      $transaksi->total_berat=$request->berat;
+      $transaksi->ongkir=$request->ongkir;
+      $transaksi->total_bayar=$request->total;
+      
+      $transaksi->save();
+      $keranjang = Keranjang::where('user_id','=',2)
+                         ->get();
+    //dd($transaksi);
+        foreach ($keranjang as $key ) {
+          $detailtransaksi = new DetailTransaksi();
+          $detailtransaksi->id_transaksi = $transaksi->id;
+          $detailtransaksi->id_produk = $key->produk_id;
+          $detailtransaksi->id_detail = $key->id_produk_ukuran;
+          $detailtransaksi->status_pesan= "Pending";
+          $detailtransaksi->jumlah_beli= $key->jumlah;
+          $detailtransaksi->save();
+          $data = Keranjang::where('user_id','=',2);
+        $data->delete();
       }
-        return redirect('kategori');
+      
+     
+      
+      
 
+      
+      return redirect()
+                ->back()
+                ->with('succes', 'Gambar Berhasil di Upload');
+                
        //
     }
-*/
 }
 /*join('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
                         ->select('produk.*','produk_ukuran.*')*/
