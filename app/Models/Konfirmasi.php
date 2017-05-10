@@ -19,7 +19,7 @@ class Konfirmasi extends Model
     protected $primaryKey = 'id_konfirmasi';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id_konfirmasi','total_transfer','tgl_tranfer','foto',
+    protected $fillable = ['id_konfirmasi','total_transfer','tgl_transfer','foto',
     'status'];
     // protected $hidden = [];
     // protected $dates = [];

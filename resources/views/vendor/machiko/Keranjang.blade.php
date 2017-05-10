@@ -27,7 +27,15 @@
                                                 </thead>
                                                 <tbody>
                                                     
-                                                   
+                                                   <?php 
+                                                   if(count($data)==0){?>
+                                                    <tr>
+                                                        <td colspan="9">
+                                                            <strong>Belum ada data</strong>
+                                                            
+                                                            </td>
+                                                    </tr>
+                                                   <?php }else{ ?>
                                                     @php
                                                     $i=1;
                                                     @endphp
@@ -60,6 +68,7 @@
                                                        ?>
                                                        
                                                        {{ csrf_field() }}
+
                                                         <input name="idkeranjang[{{$i}}]" type="hidden" id="idkeranjang"  value="{{$row->id_keranjang}}" style="width:100px"readonly>
                                                          <td class="product-price">
                                                             <span class="amount"  ><input type="hidden" id="nilai2{{$i}}" value="{{ $row->harga }}" onFocus="startCalc();" onBlur="stopCalc();">{{ $row->harga }}</span> 
@@ -102,12 +111,13 @@
                                                             <strong>Total(belum termasuk ongkos kirim)</strong>
                                                             <input name="total" type="text" id="jumlah"  value="" style="width:100px"readonly>
 
-                                                    <tr>
+                                                    </tr>
                                                      <tr>
                                                         <td colspan="9">
                                                             <strong>Berat total</strong>
                                                             <input name="total" type="text" id="total_berat"  value="" style="width:50px" readonly>gram
                                                             </td>
+                                                        </tr>
                                                     <tr>
                                                         <td class="actions" colspan="9">
                                                             <!-- <input type="submit" value="Update Cart" name="update_cart" class="button" style="background:#66CC99"> -->
@@ -119,7 +129,11 @@
                                                         </td>
 
                                                     </tr>
-                                                
+                                                    
+                                                       
+                                                        <?php
+                                                    }
+                                                   ?>
                                                 </tbody>
                                             </table>
                                         </div>

@@ -121,7 +121,7 @@
                 <form class="form-horizontal" action="{{ url('checkout/simpan') }}" method="post">
                   {{ csrf_field() }}
                 <input type="hidden" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>  
-                    <input type="text" class="form-control" id="level" name="nama_produk" value="{{$data->level}}">
+                    <input type="hidden" class="form-control" id="level" name="nama_produk" value="{{$data->level}}">
                     
                     <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
                     <div class="form-group">
@@ -129,7 +129,7 @@
                       <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>  
                       <!-- </div> -->
                       <div class="col-sm-4">
-                        <input type="text" class="form-control" id="status" name="status" value="">
+                        <input type="hidden" class="form-control" id="status" name="status" value="">
                         <select class="form-control" style="width: 100%;" id="pesan" name="jenis_pesan" onChange="a()" data-toggle="modal" required/>
                             <option>Pilih jenis pemesanan</option>
                               <option value="Customer">Customer biasa</option>
@@ -270,8 +270,10 @@
                       ?>
                        <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Metode pembayaran</label>
+                        <input type="hidden" class="form-control" id="metode_pilih" name="metode_pilih" value="">
+                        <input type="hidden" class="form-control" id="jenis_metode" name="jenis_metode" value="">
                         <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" name="metode" required/>
+                        <select class="form-control" style="width: 100%;" onChange="b()" id="metode" name="metode" required/>
                             <option>Pilih metode pembayaran</option>
                               @foreach($metodebanyak as $row)
                                     <option value="{{$row->id}}" >
@@ -338,6 +340,7 @@
                       <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
                       <div class="col-sm-4">
                         <input type="hidden" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
+                        <input type="hidden" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
                         <input type="text" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
                       </div>
                       
@@ -479,6 +482,32 @@
              
         
     </script>
+     <script type="text/javascript">
+function b() {
+      event.preventDefault();
+      
+
+      var metode = $('#metode').val();
+      var metode_pilih = $('#metode_pilih').val();
+      console.log(metode);
+       $.get("metode/"+metode,
+        function(hasil){
+          $.each(hasil, function(index, hasil){
+            // $.each(hasil, function(index, hasil){
+            
+                $('#metode_pilih').val(hasil.rate);
+                $('#jenis_metode').val(hasil.jenis);
+                /*if(hasil.jenis=="Pulsa"){
+                $('#total2').val(parseFloat($('#total').val())*parseFloat(hasil.rate)); 
+                 
+                }*/
+                
+              console.log(hasil);
+              // });
+            });
+          });
+            };
+</script>
     <script type="text/javascript">
 $(document).ready(function (){
       
@@ -595,9 +624,18 @@ function getOngkir() {
             console.log(total1);
             var ongkir = $('input[name=ongkir]:checked', '#ongkos').val(); 
             console.log(ongkir);
-            var hasil = document.getElementById("total").value=( parseInt(total1)+ parseInt(ongkir));
-
-             console.log(hasil);
+            var rate = document.getElementById("metode_pilih").value; 
+            var jenis = document.getElementById("jenis_metode").value; 
+            
+            if(jenis=="Pulsa"){
+              
+              var hasil = document.getElementById("total").value=( (parseFloat(total1)+ parseFloat(ongkir))*parseFloat(rate)).toFixed(0);
+            }
+            else{
+              var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
+            }
+            /*$('#total2').val(parseFloat(parseFloat(total1)+ parseFloat(ongkir))*parseFloat(hasil.rate)); 
+             console.log(hasil);*/
               /*@php
              $i++;
              

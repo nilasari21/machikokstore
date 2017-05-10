@@ -52,6 +52,7 @@ Route::get('checkout/getId/{kota_asal}', 'TransaksiControllerMachiko@getId');
 Route::get('checkout/hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerMachiko@hasil');
 Route::get('checkout/getAlamat/{alamat}', 'TransaksiControllerMachiko@alamat');
 Route::post('checkout/simpan', 'TransaksiControllerMachiko@tambah');
+Route::get('checkout/metode/{metode}', 'TransaksiControllerMachiko@metode');
 
 Route::get('cekongkir', 'CekongkirControllerMachiko@index');
 Route::get('cekongkir/hasil/{kota_tujuan}/{radio}/{berat}', 'CekongkirControllerMachiko@hasil');
@@ -59,3 +60,6 @@ Route::get('cekongkir/hasil/{kota_tujuan}/{radio}/{berat}', 'CekongkirController
 Route::get('hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerMachiko@hasil');
 Route::get('checkout/getId/{kota_asal}', 'TransaksiControllerMachiko@getId');
 Route::get('checkout/hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerMachiko@hasil');
+
+Route::get('konfirmasi', 'KonfirmasiControllerMachiko@index');
+Route::post('konfirmasi/simpan', 'KonfirmasiControllerMachiko@simpan');

@@ -54,27 +54,41 @@
                 <div class="hover01 column">
 
                     <figure> <img src=".img/produk/client/{{ $row->foto }}" class="img-responsive" style="width:100%"></figure>   
-                    {{ $row->id }}
+                    <!--  -->
                 </div>
+
                 <div class="caption">
                 </br>
             </br>
         </br>
     </br>
-    <h4><p>{{ $row->nama_produk }}</p></h4>
-    <h5><p>Rp{{ $row->harga }}</p></h5>
+    <h4><p style="font-family:Roboto">{{ $row->nama_produk }}</p></h4>
+    <h5><p>Rp {{ $row->harga }},00</p></h5>
     <p>
         <hr>
         <center>
-            <a href="{{ url('machikokstore/detailProduk/'.$row->id ) }}" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> lihat selengkapnya</a>
+            <!-- <a href="{{ url('machikokstore/detailProduk/'.$row->id ) }}" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> lihat selengkapnya</a> -->
+            <form method="POST"  action="{{ url('wishlist/tambah') }}">
+                        {{ csrf_field() }}
+                            <input type="hidden" size="4" name="produk_id" value="{{ $row->id }}">
+                            <button type="submit" value="Submit"  style="text-transform:capitalize;font-family:Raleway"><i class="fa fa-heart" color="#0000" ></i> Tambah Wishlist</button>
+                        </form>
         </center>
         <hr>
     </p>
 </div>
 </div>
+<p style="text-align:center;color:#66CC99;font-family:Roboto">
+<a href="{{ url('machikokstore/detailProduk/'.$row->id ) }}"><strong>{{ $row->nama_produk }}</strong></a>
+<br/>
+Rp {{ $row->harga }},00
+</p>
+ <br/>
+ <br/>
 </div>
+
                 @endforeach
                <!-- </div> -->
             </div>
-            
+           
             @endsection

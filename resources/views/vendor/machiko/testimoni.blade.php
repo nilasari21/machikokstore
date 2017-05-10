@@ -73,7 +73,7 @@
                      <textarea id="editor1" name="keterangan" rows="10" cols="20" style="border: 1px solid #DF5E96;">
                     </textarea>
                 </div>
-                <button type="submit" class="add_to_wishlist">Kirim testimoni</button>
+                <button type="submit" class="add_to_wishlist" style="text-transform:capitalize">Kirim testimoni</button>
                  </div>
 
             </div>

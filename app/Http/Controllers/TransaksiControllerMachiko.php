@@ -113,6 +113,15 @@ class TransaksiControllerMachiko extends Controller {
         return $alamat;
 
     }
+     public function metode($metode) {
+        
+
+       
+       $metode=  Metode::where('id','=',$metode)
+                            ->get();
+                            return $metode;
+
+    }
     public function tambah(Request $request)
     {
       $transaksi = new Transaksi; 
@@ -143,7 +152,7 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->jumlah_beli= $key->jumlah;
           $detailtransaksi->save();
           $data = Keranjang::where('user_id','=',2);
-        $data->delete();
+          $data->delete();
       }
       
      
