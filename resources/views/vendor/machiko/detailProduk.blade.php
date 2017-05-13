@@ -1,6 +1,8 @@
 @extends('vendor.machiko.machiko_template')
 
+@section('css')
 
+@endsection
 @section('content')
 <div class="single-product-area">
         <div class="zigzag-bottom"></div>
@@ -8,11 +10,11 @@
            
             <div class="col-md-9 padding-right" style="width:100%">
         <div class="product-details"><!--product-details-->
-        <div class="col-sm-3">
-           <img src="{{asset("/.img/produk/client/". $data->foto )}}" >     
+        <div class="col-sm-3" style="padding-top:15%">
+           <img class="img-zoom" src="{{asset("/.img/produk/client/". $data->foto )}}" >     
            <!-- <p>keterangan : {{$data->keterangan}}</p>    -->
     </div>
-    <div class="category-tab shop-details-tab"><!--category-tab-->
+    <div class="category-tab shop-details-tab" ><!--category-tab-->
     <!-- <div class="col-sm-4">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#reviews" data-toggle="tab">Details</a></li>
@@ -20,9 +22,9 @@
     </div> -->
     <div class="tab-content">
         <div class="tab-pane fade active in" id="reviews" >
-            <div class="col-sm-4">
+            <div class="col-sm-4" >
                 <br />
-                <h1 class="item_name" style="font-family:Roboto">Keterangan</h1>
+                <h1 class="item_name" ><p style="font-family:Roboto;color:#66CC99">Keterangan</p></h1>
             <hr>
                 <p style="text-align:justify">{{$data->keterangan}}</p>
                 
@@ -38,7 +40,7 @@
             <i class="item_productid" style="display:none"></i>
             <i class="item_price" style="display:none"></i>
             <div>
-              <h1 class="item_name" style="font-family:Roboto">{{ $data->nama_produk }}</h1><br/>
+              <h1 class="item_name" style="font-family:Roboto;color:#66CC99">{{ $data->nama_produk }}</h1><br/>
             <form method="POST"  action="{{ url('wishlist/tambah') }}">
                         {{ csrf_field() }}
                             <input type="hidden" size="4" name="produk_id" value="{{ $data->id }}">
@@ -142,4 +144,8 @@
 </div>
 
             
+            @endsection
+
+            @section('js')
+           
             @endsection

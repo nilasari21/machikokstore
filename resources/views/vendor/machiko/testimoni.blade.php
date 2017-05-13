@@ -22,10 +22,10 @@
                             {{ $row->name }}
                         </div>
                         <?php 
-                        if($row->foto_testi=="NULL"){?>
-                        kosong
+                        if(count($row->foto_testi)==0){?>
+                        
                         <?php
-                        }elseif($row->foto_testi!="NULL"){?> 
+                        }else{?> 
                         <div class="product-upper">
                             <img src="{{asset("/.img/produk/client/". $row->foto_testi )}}">
                         </div> 
@@ -45,54 +45,48 @@
             <div class="modal fade" id="modal3" role="dialog">
                                 <div class="modal-dialog">
                                 
-                                  <!-- Modal content-->
+                                 
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                                       <h4 class="modal-title">Kirim Testimoni</h4>
                                     </div>
                                     <div class="modal-body">
-                                      <!-- <div class="col-md-10 " >
-                                      <div class="product-details">
-                                      
-                               
-                                  <div class="col-sm-12 simpleCart_shelfItem anotherCart_shelfItem">
-                                      <div class="product-information"  style="width:100%">  -->
-                                        
+                                     
                                     <form method="POST"  enctype="multipart/form-data" files="true" action="{{ url('testimoni/simpan') }}">
                                       <div class="row">
                                           {{ csrf_field() }}
-                                          <div class="col-md-6">
+                                          <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Upload gambar</label>
                                                 <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
                                             </div>
                                               <div class="form-group">
-                                                  Testimoni Produk
+                                                  <label for="exampleInputFile">Testimoni produk</label><br/>
                     
-                     <textarea id="editor1" name="keterangan" rows="10" cols="20" style="border: 1px solid #DF5E96;">
+                     <textarea id="editor1" name="keterangan" rows="10"  style="border: 1px solid #DF5E96;width:100%">
                     </textarea>
                 </div>
-                <button type="submit" class="add_to_wishlist" style="text-transform:capitalize">Kirim testimoni</button>
+                
                  </div>
 
             </div>
        
        
-     </form>  
-<!-- </div>
-</div>
-</div>
-</div> -->
+      
+
                                     </div>
                                     <div class="modal-footer">
-                                      
-                                      
+                                      <button type="submit" class="add_to_wishlist btn-lg" style="text-transform:capitalize;padding: 8px 20px;">Kirim testimoni</button>
+                                       <button   class="add_to_wishlist btn" style="text-transform:capitalize" data-dismiss="modal">Batal</button>
+                                      </form> 
                                     </div>
                                   </div>
                                   
                                 </div>
                               </div>
+
+
             
    
 @endsection

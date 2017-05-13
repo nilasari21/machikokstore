@@ -35,10 +35,10 @@ class Konfirmasi extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function transaki()
+    /*public function transaki()
     {
         return $this->belongsTo('App\Models\Transaksi','id_konfirmasi');
-     }  
+     }*/  
      
     /*
     |--------------------------------------------------------------------------

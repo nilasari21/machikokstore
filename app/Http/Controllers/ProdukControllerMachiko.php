@@ -23,7 +23,20 @@ class ProdukControllerMachiko extends Controller {
         $kategori = Kategori::where('kategori_produk.status','=','Aktif')
                 ->get();
         
-        return view('vendor.machiko.produk')->with(compact('data',$data,'kategori',$kategori));
+        return view('vendor.machiko.produk2')->with(compact('data',$data,'kategori',$kategori));
+    }
+    public function index2() {
+      
+        $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
+                ->select('produk.*','kategori_produk.*')
+                // ->where('produk.status','=','Ready Stock')
+                ->GROUPBY('produk.id')
+                
+                ->get();
+        $kategori = Kategori::where('kategori_produk.status','=','Aktif')
+                ->get();
+        
+        return view('vendor.machiko.produk2')->with(compact('data',$data,'kategori',$kategori));
     }
     public function filter(){
          $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
@@ -43,6 +56,22 @@ class ProdukControllerMachiko extends Controller {
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->get();
         return view('vendor.machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran));
+    }
+    public function search(Request $request){
+        
+        
+        $query = $request->get('cari');
+         $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
+                ->select('produk.*','kategori_produk.*')
+                ->where('produk.nama_produk', 'like' ,'%' . $query . '%')
+                ->GROUPBY('produk.id')
+                
+                ->get();
+            
+        $kategori = Kategori::where('kategori_produk.status','=','Aktif')
+                ->get();
+        
+        return view('vendor.machiko.produk2')->with(compact('data',$data,'kategori',$kategori));
     }
 
 }

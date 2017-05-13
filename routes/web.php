@@ -32,6 +32,7 @@ Route::get('/masuk', function () {
 
 
 Route::get('machikokstore', 'ProdukControllerMachiko@index');
+Route::get('machikok', 'ProdukControllerMachiko@index2');
 Route::get('/machikokstore/detailProduk/{id}', 'ProdukControllerMachiko@detail');
 
 Route::post('keranjang/tambah', 'KeranjangControllerMachiko@tambah');
@@ -41,6 +42,7 @@ Route::post('keranjang/edit', 'KeranjangControllerMachiko@postUpdate');
 
 Route::get('wishlist', 'WishlistControllerMachiko@index');
 Route::post('wishlist/tambah', 'WishlistControllerMachiko@tambah');
+Route::get('wishlist/delete/{id}', 'WishlistControllerMachiko@getDelete');
 
 Route::get('testimoni', 'TestimoniControllerMachiko@index');
 Route::get('testimoni/tambah', 'TestimoniControllerMachiko@showtambah');
@@ -63,3 +65,5 @@ Route::get('checkout/hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerM
 
 Route::get('konfirmasi', 'KonfirmasiControllerMachiko@index');
 Route::post('konfirmasi/simpan', 'KonfirmasiControllerMachiko@simpan');
+
+Route::get('pencarian', 'ProdukControllerMachiko@search');

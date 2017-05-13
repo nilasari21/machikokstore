@@ -21,7 +21,7 @@
                                                         <th class="product-quantity" style="background:#66CC99">Harga</th>
                                                         <th class="product-price" style="background:#66CC99">Harga Tambah</th>
                                                         <th class="product-price" style="background:#66CC99">Jumlah</th>
-                                                        <th class="product-price" style="background:#66CC99">Berat</th>
+                                                        <th class="product-price" style="background:#66CC99">Berat total(gram)</th>
                                                         <th class="product-subtotal" style="background:#66CC99">Total</th>
                                                     </tr>
                                                 </thead>
@@ -40,6 +40,7 @@
                                                     $i=1;
                                                     @endphp
                                                     @foreach ($data as $row)
+                                                    <input name="level" type="text" id="level"  value="{{$row->level}}" style="width:100px"readonly>
                                                     <tr class="cart_item">
                                                         <td class="product-remove">
                                                             <a title="Remove this item" class="remove" href="{{ url('keranjang/delete/'.$row->id_keranjang) }}" onclick="return confirm('Anda yakin ingin menghapus .$row->nama_produk?')">×</a> 
@@ -96,7 +97,9 @@
                                                             </div>
                                                         </td>
                                                         <td class="product-name">
-                                                            <span class="amount" ><input name="berat" type="text" id="berat{{$i}}"  value="{{ $row->berat_total }} gram" style="width:70px" readonly></span> 
+                                                            
+                                                            <span class="amount" ><input name="berat" type="hidden" id="berat{{$i}}"  value="{{ $row->berat_total }} gram" style="width:70px" readonly></span> 
+                                                            <span class="amount" ><input name="berat2" type="text" id="beratto{{$i}}"  value="" style="width:70px" readonly></span> 
                                                         </td>
                                                        <td class="product-subtotal" >
                                                             <span class="amount" ><input name="total" type="text" id="total{{$i}}"  value="" style="width:100px" readonly></span> 
@@ -121,8 +124,8 @@
                                                     <tr>
                                                         <td class="actions" colspan="9">
                                                             <!-- <input type="submit" value="Update Cart" name="update_cart" class="button" style="background:#66CC99"> -->
-                                                            <button type="submit" class="add_to_wishlist" style="text-transform: capitalize;height:35px;padding: 5px 5px;">Update keranjang</button>
-                                        
+                                                            <button type="submit" class="add_to_cart_button" value="submit" style="background:#66CC99;text-transform: capitalize;height:35px;padding: 5px 5px;font-family:Raleway;font-size:15px; "> Update keranjang</button>
+                                                            
                                                        </form>
                                         
                                                         <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/2') }}">Checkout</a>
@@ -165,13 +168,14 @@
              console.log(tiga);
              var berat = document.getElementById("berat{{$i}}").value; 
              console.log(berat);
-             var hasil = document.getElementById("total{{$i}}").value=( parseInt(satu)* parseInt(dua))+ parseInt(tiga);
+             var beratto=document.getElementById("beratto{{$i}}").value=(parseInt(satu)* parseInt(berat));
+             var hasil = document.getElementById("total{{$i}}").value=( parseInt(beratto)* parseInt(dua))+ parseInt(tiga);
 
              console.log(hasil);
              total=total+( parseInt(satu)* parseInt(dua))+ parseInt(tiga);
              document.getElementById("jumlah").value=total;
              console.log(total);
-             berat_total=berat_total+( parseInt(berat));
+             berat_total=berat_total+( parseInt(berat)*parseInt(satu));
              document.getElementById("total_berat").value=berat_total;
              console.log(berat_total);
              @php

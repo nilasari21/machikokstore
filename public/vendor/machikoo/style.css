@@ -158,6 +158,7 @@ body { font-family: 'Titillium Web', sans-serif; }
     margin-right: 5px;
     padding: 10px;
 }
+
 .user-menu li a i.fa {
     margin-right: 5px;
 }
@@ -702,9 +703,10 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
 }
 input[type="submit"], button[type=submit] {
     background: none repeat scroll 0 0 #F09BA0;
+    /*background: #66CC99;*/
     border: medium none;
     color: #fff;
-    padding: 11px 20px;
+    /*padding: 11px 20px;*/
     text-transform: uppercase;
 }
 input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
@@ -799,7 +801,7 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
     width: 50px;
 }
 .add_to_cart_button {
-    background: none repeat scroll 0 0 #66CC99;
+    background: none repeat scroll 0 0 #66CC99 !important;
     border: medium none;
     color: #fff;
     font-family: raleway;
@@ -1136,4 +1138,28 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 .pagination > li > a, .pagination > li > span {
   color: #F09BA0;
+}
+.panel-title{
+        margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 16px !important;
+    color: inherit !important;
+}
+.category-products .panel-default .panel-heading {
+    background-color: #FFFFFF !important;
+    border: 0 none !important;
+    color: #FFFFFF !important;
+    padding: 5px 20px !important;
+}
+.category-products {
+    border: 1px solid #F7F7F0 !important;
+    margin-bottom: 35px !important;
+    padding-bottom: 20px !important;
+    padding-top: 15px !important;
+}
+.panel-heading {
+    padding: 10px 15px !important;
+    border-bottom: 1px solid transparent !important;
+    border-top-right-radius: 3px !important;
+    border-top-left-radius: 3px !important;
 }

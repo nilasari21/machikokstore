@@ -16,7 +16,7 @@ class WishlistControllerMachiko extends Controller {
         $data = Wishlist::join('produk','produk.id','=','wishlist.id_produk')
                          ->where('id_user','=','1')
                          ->get();
-       
+       // dd($data);
         return view('vendor.machiko.wishlist')->with('data',$data);
     }
     public function tambah(Request $request)
@@ -34,6 +34,12 @@ class WishlistControllerMachiko extends Controller {
                 
 
        //
+    }
+    public function getDelete($id)
+    {
+        $data = Wishlist::where('id_wishlist','=',$id);
+        $data->delete();
+        return redirect('wishlist');
     }
 
 }

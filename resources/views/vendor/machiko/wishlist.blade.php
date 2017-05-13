@@ -12,26 +12,58 @@
 <?php
 }else{ ?>
    
-            <div class="row">
+           <div class="col-sm-12 padding-right">
+    <div class="features_items"><!--features_items-->
+        
+        <br/> 
+       <!-- <div class="row padding-right" > -->
                 @foreach ($data as $row)
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-shop-product">
+        <!-- <div class=" col-sm-4">
+            <div class="thumbnail">
+                <div class="hover01 column"> -->
+        
+                    
                         <div class="product-upper">
-                            <img src=".img/produk/client/{{ $row->foto }}" alt="">
-                        </div>
-                        <h2><a href="#">{{ $row->nama_produk }}</a></h2>
-                        <div class="product-carousel-price">
-                            <ins>Rp{{ $row->harga }}</ins> 
-                        </div>  
-                        <input type="hidden" class="form-control" name="harga" value="{{ $row->id }}" required>
-                        <div class="product-option-shop">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('machikokstore/detailProduk/'.$row->id ) }}">Detail</a>
-                        </div>                       
-                    </div>
+                            <div class=" col-md-3 col-sm-6 ">
+            <div class="thumbnail">
+                <div class="hover01 column"> 
+                    <figure> <img src=".img/produk/client/{{ $row->foto }}" class="img-responsive" style="width:200%"></figure>   
+
                 </div>
-                @endforeach
-               
-            </div>
+                <div class="caption">
+                </br>
+            <!-- </br>
+        </br>
+    </br> -->
+    <h4><p style="font-family:Roboto">{{ $row->nama_produk }}</p></h4>
+    <h5><p>Rp {{ $row->harga }},00</p></h5>
+    <p>
+        <hr>
+        <center>
+            <!-- <form method="POST"  action="{{ url('keranjang/delete/'.$row->id_wishlist) }}"> -->
+                        <!-- {{ csrf_field() }} -->
+                            <input type="hidden" size="4" name="produk_id" value="{{ $row->id_wishlist }}">
+                            <a class="add_to_wishlist "  style="background:#F09BA0 !important" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('wishlist/delete/'.$row->id_wishlist) }}"><i class="fa fa-remove"></i> Hapus Wishlist</a><br/><br/>
+                            <a class="add_to_cart_button "  style="background:#F09BA0 !important" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('machikokstore/detailProduk/'.$row->id ) }}"><i class="fa fa-link"></i> Lihat Detail</a>
+                        <!-- </form> -->
+        </center>
+        <hr>
+    </p>
+</div>
+</div>
+<p style="text-align:center;color:#66CC99;font-family:Roboto">
+<a href="{{ url('machikokstore/detailProduk/'.$row->id ) }}"><strong>{{ $row->nama_produk }}</strong></a>
+<br/>
+Rp {{ $row->harga }},00
+</p>
+ <br/>
+ <br/>
+</div>
+</div>
+@endforeach
+</div>
+</div>
+
 <?php
 }
 ?>

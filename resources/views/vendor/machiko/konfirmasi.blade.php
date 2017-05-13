@@ -112,7 +112,7 @@
                                     <form method="POST"  enctype="multipart/form-data" files="true" action="{{ url('konfirmasi/simpan') }}">
                                       <div class="row">
                                           {{ csrf_field() }}
-                                          <div class="col-md-6">
+                                          <div class="col-md-12">
                                             
                                             <input type="text" id="idtrans" name="idtrans">
                                             <div class="form-group">
@@ -134,21 +134,21 @@
                                                 <label for="exampleInputFile">Total transfer</label>
                                                <input  type="number" name="total_transfer" class="form-control" placeholder="Total transfer" min=1 required> 
                                             </div>   
-                <button type="submit" class="add_to_wishlist" style="text-transform:capitalize">Kirim bukti</button>
+                
                  </div>
 
             </div>
        
        
-     </form>  
+    
 <!-- </div>
 </div>
 </div>
 </div> -->
                                     </div>
                                     <div class="modal-footer">
-                                      
-                                      
+                                      <button type="submit" class="add_to_wishlist" style="text-transform:capitalize">Kirim bukti</button>
+                                       </form>  
                                     </div>
                                   </div>
                                   

@@ -47,7 +47,7 @@ class TransaksiControllerMachiko extends Controller {
                          // ->join('users','users.id','=','keranjang.user_id')
                          ->leftJoin('produk_ukuran','produk_ukuran.id_detail','=','keranjang.id_produk_ukuran')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
-                         ->select((DB::raw ('SUM(keranjang.berat_total) as berat')),(DB::raw ('SUM(keranjang.Total_harga) as total')))
+                         ->select((DB::raw ('SUM((keranjang.berat_total)*(keranjang.jumlah)) as berat')),(DB::raw ('SUM(keranjang.Total_harga) as total')))
                          ->where('user_id','=','2')
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
@@ -142,10 +142,10 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->save();
       $keranjang = Keranjang::where('user_id','=',2)
                          ->get();
-    //dd($transaksi);
+    // dd($transaksi);
         foreach ($keranjang as $key ) {
           $detailtransaksi = new DetailTransaksi();
-          $detailtransaksi->id_transaksi = $transaksi->id;
+          $detailtransaksi->id_transaksi = $transaksi->id_transaksi;
           $detailtransaksi->id_produk = $key->produk_id;
           $detailtransaksi->id_detail = $key->id_produk_ukuran;
           $detailtransaksi->status_pesan= "Pending";

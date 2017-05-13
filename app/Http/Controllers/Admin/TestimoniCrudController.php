@@ -52,7 +52,7 @@ class TestimoniCrudController extends CrudController
            'model' => "App\User", // foreign key model
         ]);
         $this->crud->addColumn([
-           'name' => 'foto', // The db column name
+           'name' => 'foto_testi', // The db column name
            'label' => "Foto" // Table column heading
         ]);
         $this->crud->addColumn([
@@ -70,11 +70,11 @@ class TestimoniCrudController extends CrudController
         // $this->crud->addButton($stack, $name, $type, $content, $position); // add a button; possible types are: view, model_function
         // $this->crud->addButtonFromModelFunction($stack, $name, $model_function_name, $position); // add a button whose HTML is returned by a method in the CRUD model
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
-        // $this->crud->removeButton($name);
+        //$this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
 
         // ------ CRUD ACCESS
-        // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
+         $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
         //$this->crud->denyAccess(['create', 'update']);
 
         // ------ CRUD REORDER
@@ -95,12 +95,12 @@ class TestimoniCrudController extends CrudController
         // Please note the drawbacks of this though:
         // - 1-n and n-n columns are not searchable
         // - date and datetime columns won't be sortable anymore
-        // $this->crud->enableAjaxTable();
+        //$this->crud->enableAjaxTable();
 
         // ------ DATATABLE EXPORT BUTTONS
         // Show export to PDF, CSV, XLS and Print buttons on the table view.
         // Does not work well with AJAX datatables.
-        // $this->crud->enableExportButtons();
+         //$this->crud->enableExportButtons();
 
         // ------ ADVANCED QUERIES
         // $this->crud->addClause('active');
@@ -135,4 +135,19 @@ class TestimoniCrudController extends CrudController
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
+    /*public function destroy(UpdateRequest $request)
+    {
+        // your additional operations before save here
+        //$redirect_location = parent::updateCrud();
+        // your additional operations after save here
+        // use $this->data['entry'] or $this->crud->entry
+        return redirect()
+                ->back();
+    }*/
+    /*public function getDelete($id)
+    {
+        $data = Keranjang::where('id_testi','=',$id);
+        $data->delete();
+        return redirect('testimoni');
+    }*/
 }

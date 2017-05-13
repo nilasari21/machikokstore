@@ -14,6 +14,8 @@
     <!-- Bootstrap -->
     <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
+    <!-- <link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap-modal-bs3patch.css")}}">
+    <link rel="stylesheet" href="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/css/bootstrap-modal.css")}}"> -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->
     <!-- Font Awesome -->
     <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
@@ -75,12 +77,14 @@
     <!-- Latest jQuery form server -->
     <!--<script src="{{asset("https://code.jquery.com/jquery.min.js")}}"></script>-->
     
-    <!--<script src="{{asset("https://code.jquery.com/jquery-3.2.1.min.js")}}"></script>-->
-    <script src="{{asset("vendor/machikoo/js/jquery-3.2.1.min.js")}}"></script>
-    <!--<script src="{{asset("https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js")}}"></script>-->
+    <script src="{{asset("https://code.jquery.com/jquery-3.2.1.min.js")}}"></script>
+    <!--<script src="{{asset("vendor/machikoo/js/jquery-3.2.1.min.js")}}"></script>-->
+    <!--<script src="{{asset("https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js")}}"></script>--->
     <!-- Bootstrap JS form CDN -->
     <script src="{{asset("http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")}}"></script>
-    
+    <!--<script src="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/js/bootstrap-modal.js")}}"></script>
+    <script src="{{asset("/vendor/machikoo/bootstrap-3.2.0/dist/js/bootstrap-modalmanager.js")}}"></script>
+    -->
     <!-- jQuery sticky menu -->
     <script src="{{asset("vendor/machikoo/js/owl.carousel.min.js")}}"></script>
     <script src="{{asset("vendor/machikoo/js/jquery.sticky.js")}}"></script>

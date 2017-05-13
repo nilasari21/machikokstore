@@ -15,10 +15,10 @@ class KeranjangControllerMachiko extends Controller {
         // $data=[];
         
         $data = Keranjang::join('produk','produk.id','=','keranjang.produk_id')
-                         // ->join('users','users.id','=','keranjang.user_id')
+                         ->join('users','users.id','=','keranjang.user_id')
                          ->leftJoin('produk_ukuran','produk_ukuran.id_detail','=','keranjang.id_produk_ukuran')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
-                         ->select('keranjang.*','produk.*','produk_ukuran.*','ukuran.*')
+                         ->select('keranjang.*','produk.*','produk_ukuran.*','ukuran.*','users.*')
                          ->where('user_id','=','2')
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
@@ -30,6 +30,23 @@ class KeranjangControllerMachiko extends Controller {
 
                             ->get();*/
         return view('vendor.machiko.keranjang')->with('data',$data);
+    }
+     public function header() {
+        // $data=[];
+        
+        $data = Keranjang::select((DB::raw ('SUM(keranjang.Total_harga) as total')))
+                        ->where('user_id','=','2')
+                    // ->where('produk.status','=','Ready Stock')
+                         ->get();
+                         // dd($data);
+        // $data->ukuran= new ProdukUkuran;
+        /*$ukuran= ProdukUkuran::join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                            ->where('produk_ukuran.produk_id','=','keranjang.produk_id'
+                              ,'and','keranjang.id_produk_ukuran','=','produk_ukuran.id_detail')
+
+                            ->get();*/
+                            dd($data);
+        return view('vendor.machiko.header')->with('data',$data);
     }
     public function tambah(Request $request)
     {
@@ -78,6 +95,7 @@ class KeranjangControllerMachiko extends Controller {
         foreach ($request->jumlah1 as $key ) {
             $data=Keranjang::where('id_keranjang','=',$request->idkeranjang[$i])->first();
             $data->jumlah=$key;
+            // $data->berat_total= ($key)*($request->berat);
             $data->save();
             $i++;       
         }

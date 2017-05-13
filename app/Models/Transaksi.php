@@ -16,7 +16,7 @@ class Transaksi extends Model
     */
 
     protected $table = 'transaksi';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_transaksi';
     // public $timestamps = false;
     // protected $guarded = ['id'];
     protected $fillable = ['id_transaksi','id_user','tgl_transaksi','id_metode',
@@ -42,7 +42,7 @@ class Transaksi extends Model
      }  
      public function konfirmasi()
     {
-        return $this->hasOne('App\Models\Konfirmasi','id_konfirmasi');
+        return $this->belongsTo('App\Models\Konfirmasi','id_konfirmasi');
      }  
      public function penerima()
     {

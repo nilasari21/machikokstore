@@ -2,11 +2,10 @@
 <!--  -->
 
 @section('content')
-<!-- <div class="col-md-9"> -->
+
 <form method="POST"  enctype="multipart/form-data" files="true">
    
     <div class="panel panel-card" style="padding:10px; ">
-
 {{ csrf_field() }}
     <div class="form-group"  >
         <label for="exampleInputFile">Gambar Produk</label>
@@ -24,7 +23,6 @@
                         </option>
                         @endforeach
         </select>
-            
     <label> Harga </label><br/>
         <input type="text" class="form-control" name="harga" placeholder="Harga Produk" required>
     
@@ -32,36 +30,53 @@
     <div class="form-group"  >
         <div class="radio">
             <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onClick="displayForm(this)" checked>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="radio1" onClick="display(this)" checked>
                      Tidak tersedia
             </label>
         </div>
         <div class="radio">
             <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onClick="displayForm(this)">
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="radio2" onClick="display(this)">
                       Tersedia
             </label>
         </div>
     </div>
 
-    <div class="formukuran" id="ukuran" style="display:none" >
+    <div class="formukuran" id="ukuran1" style="display:none" >
         @foreach($ukuran as $ukuran)    
             <input type="checkbox" name="id[]" value="{{$ukuran->id}}" > &nbsp;
             {{$ukuran->nama_ukuran}} </input>
-            <input type="text" name="stock_[]"  placeholder="stock" style="padding:5px; width:10%" >
+            
             <input type="text" name="harga_tambah[]" placeholder="harga tambah dari harga pokok produk" style="padding:5px; width:25%" >
             <br/><br/>
         @endforeach     
     </div>
-    <label>Stock Total</label>
-        <input type="text" class="form-control" name="stock_total" placeholder="Berat" required>
+    <label>Mulai Preorder</label>
+        <div class='input-group date' >
+                        <input type='text' name="tgl_awal_po" class="form-control" id="datepicker" required >
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+    <label>Akhir Preorder</label>
+        <div class='input-group date' >
+                        <input type='text' name="tgl_akhir_po"class="form-control" id="datepicker2" required >
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
     <label>Berat(gram)</label>
         <input type="text" class="form-control" name="berat" placeholder="Berat" required>
     <label>Minimal beli (Reseller)</label>
         <input type="text" class="form-control" name="minimal_beli" placeholder="minimal beli" required>
     
     <label>Batas Akhir Pembayaran</label>
-    <input type="text" class="form-control" name="batas_jam" placeholder="Batas bayar(nominal jumlah jam)" required> 
+    <div class='input-group date' >
+                        <input type='text' name="batas_bayar" class="form-control" id="datepicker3" required >
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
     <label>Metode Pembayaran</label>
     <br/>
     @foreach($metode as $metode)
@@ -70,17 +85,17 @@
         <br/>
     @endforeach
   <div class="form-group">
-         <label>Deskripsi Produk</label><br/>
-         <textarea id="editor1" name="editor1" rows="10" cols="50" >
+         <label>Deskripsi Produk</label>
+         <textarea id="editor1" name="editor1" rows="10" cols="80" >
                                             
                     </textarea>
          
    </div>
        {{ csrf_field() }}
-    <button type="submit" id="buttonukuran" class="btn btn-fw btn-success waves-effect waves-effect" style="display:none" >Tambah</button>
-    <button type="submit" id="buttonnonukuran" class="btn btn-fw btn-info waves-effect waves-effect">Tambah</button> 
+    <button type="submit" id="buttonukuran1" class="btn btn-fw btn-success waves-effect waves-effect" style="display:none" >Tambah</button>
+    <button type="submit" id="buttonnonukuran1" class="btn btn-fw btn-info waves-effect waves-effect">Tambah</button> 
     </div>
 
 </form>  
-<!-- </div>   -->
+</div>  
 @endsection

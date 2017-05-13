@@ -36,6 +36,9 @@
     <!-- BackPack Base CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/backpack/backpack.base.css') }}">
 
+    <!-- Datepicker -->
+    <link href="{{ asset("/vendor/adminlte/plugins/datepicker/datepicker3.css") }}" rel="stylesheet" type="text/css" />
+    
     @yield('after_styles')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -122,7 +125,11 @@
 
     <!-- ImageUpload -->
     <script src="{{ asset("imageUpload/dist/js/bootstrap-imageupload.min.js") }}"></script>
-
+    <!-- Datepicker -->
+    <script src="{{ asset("vendor/adminlte/plugins/datepicker/bootstrap-datepicker.js") }}"  > </script>
+  <script src="{{ asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.js") }}"  > </script>
+  <script src="{{ asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js") }}"  > </script>
+  <script src="{{ asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.extensions.js") }}"  > </script>
     <!-- CK Editor -->
     <script src="{{ asset("vendor/adminlte/plugins/ckeditor/ckeditor.js") }}"></script>
     <!--<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>-->
@@ -182,7 +189,41 @@
           });
         });
        </script>
+<script type="text/javascript">
+           function display(c){
+            
+            if (c.value=="radio1"){
+                jQuery('#ukuran1').hide();
+                jQuery('#buttonukuran1').hide();  
+                jQuery('#buttonnonukuran1').toggle('show'); 
+                
 
+            }
+            if (c.value=="radio2"){
+                jQuery('#ukuran1').toggle('show');
+                jQuery('#buttonukuran1').toggle('show');
+                jQuery('#buttonnonukuran1').hide();
+                 
+            }
+           };
+
+       </script>
+
+       <script type="text/javascript">
+        $(function(){
+          $('#buttonnonukuran1').click(function(){
+            $(this).closest("form").attr('action','{{ url('admin/preorder/simpannonukuran') }}')
+          });
+        });
+       </script>
+
+       <script type="text/javascript">
+        $(function(){
+          $('#buttonukuran1').click(function(){
+            $(this).closest("form").attr('action','{{ url('admin/preorder/simpanukuran') }}')
+          });
+        });
+       </script>
        <script>
   $(function () {
     $("#example1").DataTable();
@@ -198,18 +239,90 @@
 </script>
 <script>
   $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    CKEDITOR.replace('editor1');
-    //bootstrap WYSIHTML5 - text editor
-    $(".textarea").wysihtml5();
+    $("#example3").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
   });
 </script>
+<script>
+  $(function () {
+    $("#example4").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+<script>
+  $(function () {
+    $("#example6").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+
+<script>
+  $(function () {
+    $("#example5").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+
+ <script>
+  $(function () {
+   $('#datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    // startDate: '-3d'
+    })
+     });
+    </script>
+    <script>
+  $(function () {
+   $('#datepicker2').datepicker({
+    format: 'yyyy-mm-dd',
+    // startDate: '-3d'
+    })
+     });
+    </script>
+    <script>
+  $(function () {
+   $('#datepicker3').datepicker({
+    format: 'yyyy-mm-dd',
+    // startDate: '-3d'
+    })
+     });
+    </script>
+
+@yield('js')
     @include('backpack::inc.alerts')
 
     @yield('after_scripts')
 
     <!-- JavaScripts -->
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    
 </body>
 </html>

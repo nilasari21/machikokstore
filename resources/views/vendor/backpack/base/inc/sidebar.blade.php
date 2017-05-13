@@ -25,13 +25,21 @@
           <li class="treeview">
                 <a href="#"> <i class="fa fa-dashboard"></i><span>Produk</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <<li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Pre-order</a></li>
+                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Pre-order</a></li>
                     <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/readystock') }}">Ready Stock</a></li>
+                </ul>
+            </li>
+          <li class="treeview">
+                <a href="#"> <i class="fa fa-dashboard"></i><span>Transaksi</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/transaksi') }}">Kelola transaksi</a></li>
+                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/readystock') }}">Kelola pembayaran</a></li>
+                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/readystock') }}">Transaksi reseller</a></li>
                 </ul>
             </li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/metode') }}"><i class="fa fa-dashboard"></i> <span>Metode</span></a></li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/testimoni') }}"><i class="fa fa-dashboard"></i> <span>Testimoni</span></a></li>
-           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/testimoni') }}"><i class="fa fa-dashboard"></i> <span>User</span></a></li>
+           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/testimoni') }}"><i class="fa fa-user"></i> <span>User</span></a></li>
           <!-- ======================================= -->
           <!-- <li class="header">{{ trans('backpack::base.user') }}</li> -->
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}"><i class="fa fa-sign-out"></i> <span>{{ trans('backpack::base.logout') }}</span></a></li>

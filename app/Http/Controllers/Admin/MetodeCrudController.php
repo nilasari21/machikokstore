@@ -146,7 +146,7 @@ class MetodeCrudController extends CrudController
         // Please note the drawbacks of this though:
         // - 1-n and n-n columns are not searchable
         // - date and datetime columns won't be sortable anymore
-        // $this->crud->enableAjaxTable();
+         $this->crud->enableAjaxTable();
 
         // ------ DATATABLE EXPORT BUTTONS
         // Show export to PDF, CSV, XLS and Print buttons on the table view.
@@ -156,8 +156,8 @@ class MetodeCrudController extends CrudController
         // ------ ADVANCED QUERIES
         // $this->crud->addClause('active');
         // $this->crud->addClause('type', 'car');
-        // $this->crud->addClause('where', 'name', '==', 'car');
-        // $this->crud->addClause('whereName', 'car');
+         //$this->crud->addClause('where', 'metode', '==', 'BRI');
+        //$this->crud->addClause('whereJenis', 'Pulsa');
         // $this->crud->addClause('whereHas', 'posts', function($query) {
         //     $query->activePosts();
         // });
